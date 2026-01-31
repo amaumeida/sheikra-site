@@ -123,7 +123,12 @@
       checkboxes.forEach(cb => {
         cb.addEventListener('change', () => {
           const checked = Array.from(checkboxes).filter(i => i.checked);
-          if(checked.length > 5) cb.checked = false;
+
+          // Bloqueia imediatamente se ultrapassar 5
+          if(checked.length > 5){
+            cb.checked = false; 
+            return;
+          }
 
           // Atualiza preview
           previewDiv.innerHTML = "";
