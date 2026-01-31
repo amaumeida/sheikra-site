@@ -42,12 +42,12 @@
 <body>
   <header>
     <h1>$ORGANICLIFE2026</h1>
-    <p>Vote which colors go into each pot 🌱 (select 5 colors per pot, limited total per color)</p>
+    <p>Vote which colors go into each pot 🌱 (select 5 colors per pot, max 5 per color globally)</p>
   </header>
 
   <section class="section">
     <h2>Choose Colors for Each Pot</h2>
-    <p>Select exactly 5 colors per pot. Each color has limited total quantity across all pots.</p>
+    <p>Select exactly 5 colors per pot. No color can be used more than 5 times total across all pots.</p>
     
     <form id="vote-form" action="https://formspree.io/f/xbdkrlao" method="POST">
       <div class="vote-section" id="vote-section"></div>
@@ -83,9 +83,10 @@
 
   <script>
     const colors = ["Red","Blue","Green","Yellow","Purple"];
-    const totalPerColor = 5; // total de cada cor disponível
-    const globalStock = { Red: 5, Blue: 5, Green: 5, Yellow: 5, Purple: 5 };
     const voteSection = document.getElementById("vote-section");
+
+    // Contador global de cores
+    const globalColorCount = { Red:0, Blue:0, Green:0, Yellow:0, Purple:0 };
 
     for (let pot = 1; pot <= 5; pot++) {
       const potDiv = document.createElement("div");
@@ -106,56 +107,42 @@
       potDiv.appendChild(gridDiv);
       voteSection.appendChild(potDiv);
 
+      // Limite por pote + global
       const checkboxes = potDiv.querySelectorAll(`input[name=pot${pot}]`);
       const previewDiv = document.getElementById(`preview-pot${pot}`);
 
       checkboxes.forEach(cb => {
         cb.addEventListener('change', () => {
-          const checked = Array.from(checkboxes).filter(i => i.checked);
-          // Limite de 5 por pote
-          if(checked.length > 5){
+          const checkedPot = Array.from(checkboxes).filter(i => i.checked);
+
+          // Bloqueia se ultrapassar 5 por pote
+          if(checkedPot.length > 5){
+            cb.checked = false; 
+            return;
+          }
+
+          // Conta globalmente
+          const currentGlobalCount = { Red:0, Blue:0, Green:0, Yellow:0, Purple:0 };
+          const allChecked = document.querySelectorAll("input[type=checkbox]:checked");
+          allChecked.forEach(c => currentGlobalCount[c.value]++);
+
+          if(currentGlobalCount[cb.value] > 5){
             cb.checked = false;
+            alert(`You can only use ${cb.value} up to 5 times globally!`);
             return;
           }
 
           // Atualiza preview
           previewDiv.innerHTML = "";
-          checked.forEach(chk => {
+          checkedPot.forEach(chk => {
             const colorBox = document.createElement("div");
             colorBox.className = `color-box ${chk.value}`;
             colorBox.style.width = "30px";
             colorBox.style.height = "30px";
             previewDiv.appendChild(colorBox);
           });
-
-          // Atualiza estoque global
-          updateGlobalStock();
         });
       });
-    }
-
-    function updateGlobalStock() {
-      // reset globalStock
-      const used = { Red:0, Blue:0, Green:0, Yellow:0, Purple:0 };
-      for(let pot=1; pot<=5; pot++){
-        const checked = document.querySelectorAll(`input[name=pot${pot}]:checked`);
-        checked.forEach(c => used[c.value]++);
-      }
-
-      // atualiza checkboxes
-      for(let pot=1; pot<=5; pot++){
-        const checkboxes = document.querySelectorAll(`input[name=pot${pot}]`);
-        checkboxes.forEach(cb => {
-          const remaining = totalPerColor - used[cb.value];
-          if(!cb.checked && remaining <= 0){
-            cb.disabled = true;
-            cb.nextSibling.style.opacity = "0.4";
-          } else {
-            cb.disabled = false;
-            cb.nextSibling.style.opacity = "1";
-          }
-        });
-      }
     }
 
     const voteForm = document.getElementById("vote-form");
