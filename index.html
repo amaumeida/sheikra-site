@@ -41,6 +41,10 @@
     .footer { background: #379683; padding: 2rem; font-size: 0.9rem; color: #fff; text-align: center; margin-top: 3rem; }
     .photo-section { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-top: 2rem; }
     .photo-section img { width: 150px; height: 150px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+    .wallet-input { margin-top: 2rem; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+    .wallet-input input { padding: 0.6rem; width: 300px; border-radius: 6px; border: 1px solid #999; font-size: 1rem; }
+    .wallet-input p { font-size: 0.9rem; color: #555; max-width: 350px; text-align: center; }
+    .error-msg { color: #ff0000; font-weight: bold; margin-top: 1rem; }
   </style>
 </head>
 <body>
@@ -57,7 +61,13 @@
       <!-- Potes gerados pelo script -->
     </div>
 
-    <button class="btn">Submit Vote</button>
+    <div class="wallet-input">
+      <input type="text" id="sol-wallet" placeholder="Enter your Solana wallet address" />
+      <p>No wallet connection required. Only holders of <strong>$OrganicLife2026</strong> are eligible to participate.</p>
+    </div>
+
+    <button class="btn" id="submitBtn">Submit Vote</button>
+    <div class="error-msg" id="error-msg"></div>
   </section>
 
   <section class="section photo-section">
@@ -104,6 +114,31 @@
         });
       });
     }
+
+    const submitBtn = document.getElementById("submitBtn");
+    const errorMsg = document.getElementById("error-msg");
+
+    submitBtn.addEventListener("click", () => {
+      errorMsg.textContent = ""; // limpar mensagem
+
+      const wallet = document.getElementById("sol-wallet").value.trim();
+      if(!wallet){
+        errorMsg.textContent = "Error: Please enter your Solana wallet address!";
+        return;
+      }
+
+      for(let pot=1; pot<=5; pot++){
+        const checked = document.querySelectorAll(`input[name=pot${pot}]:checked`);
+        if(checked.length !== 5){
+          errorMsg.textContent = `Error: You must select exactly 5 colors for Pot ${pot}!`;
+          return;
+        }
+      }
+
+      errorMsg.style.color = "#00aa00";
+      errorMsg.textContent = "Vote submitted successfully! ✅";
+      // Aqui você pode adicionar envio real para backend
+    });
   </script>
 </body>
 </html>
