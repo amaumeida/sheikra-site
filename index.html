@@ -7,21 +7,40 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Orbitron', sans-serif; }
-    body { background: linear-gradient(180deg, #0a0a23, #121236); color: #fff; }
-    header { padding: 2rem; text-align: center; background: #14142b; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
-    header h1 { font-size: 3rem; color: #22c55e; }
-    header p { font-size: 1.2rem; color: #ccc; }
+    body { 
+      background: linear-gradient(180deg, #a8e6cf, #dcedc1); 
+      color: #333;
+      min-height: 100vh;
+    }
+    header { 
+      padding: 2rem; 
+      text-align: center; 
+      background: #379683; 
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3); 
+      color: #fff;
+    }
+    header h1 { font-size: 3rem; }
+    header p { font-size: 1.2rem; }
     .section { padding: 3rem 2rem; text-align: center; }
-    .section h2 { font-size: 2.2rem; margin-bottom: 1rem; color: #FFD700; }
+    .section h2 { font-size: 2rem; margin-bottom: 1rem; color: #ff6f61; }
     .vote-section { display: flex; flex-direction: column; align-items: center; gap: 2rem; margin-top: 2rem; }
-    .pot { background: #1a1a36; padding: 1rem; border-radius: 10px; width: 350px; }
-    .pot h3 { margin-bottom: 0.8rem; text-align: center; }
+    .pot { background: #ffffffaa; padding: 1rem; border-radius: 10px; width: 360px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+    .pot h3 { margin-bottom: 1rem; text-align: center; color: #222; }
     .checkbox-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.5rem; }
-    label { display: flex; justify-content: center; align-items: center; background: #333355; padding: 0.4rem; border-radius: 6px; cursor: pointer; font-size: 0.9rem; }
-    input[type="checkbox"] { margin-right: 0.3rem; cursor: pointer; }
-    .btn { margin-top: 1rem; padding: 0.8rem 2rem; background: #22c55e; color: #000; font-weight: bold; border-radius: 8px; cursor: pointer; transition: 0.3s; border: none; }
-    .btn:hover { background: #16a34a; }
-    .footer { background: #0d0d1a; padding: 2rem; font-size: 0.9rem; color: #777; text-align: center; margin-top: 3rem; }
+    label { display: flex; justify-content: center; align-items: center; padding: 0.4rem; border-radius: 6px; cursor: pointer; font-size: 0.9rem; color: #fff; font-weight: bold; }
+    input[type="checkbox"] { display: none; }
+    input[type="checkbox"]:checked + span { border: 2px solid #333; transform: scale(1.1); }
+    .color-box { width: 40px; height: 40px; border-radius: 6px; display: flex; justify-content: center; align-items: center; color: #fff; font-weight: bold; transition: transform 0.2s, border 0.2s; }
+    .Red { background-color: #e74c3c; }
+    .Blue { background-color: #3498db; }
+    .Green { background-color: #2ecc71; }
+    .Yellow { background-color: #f1c40f; color: #000; }
+    .Purple { background-color: #9b59b6; }
+    .btn { margin-top: 1rem; padding: 0.8rem 2rem; background: #ff6f61; color: #fff; font-weight: bold; border-radius: 8px; cursor: pointer; transition: 0.3s; border: none; }
+    .btn:hover { background: #ff3b2e; transform: scale(1.05); }
+    .footer { background: #379683; padding: 2rem; font-size: 0.9rem; color: #fff; text-align: center; margin-top: 3rem; }
+    .photo-section { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-top: 2rem; }
+    .photo-section img { width: 150px; height: 150px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
   </style>
 </head>
 <body>
@@ -35,8 +54,18 @@
     <p>Select exactly 5 colors for each pot (5 colors x 5 repetitions = 25 boxes per pot)</p>
     
     <div class="vote-section" id="vote-section">
-      <!-- Potes serão gerados pelo script -->
+      <!-- Potes gerados pelo script -->
     </div>
+
+    <button class="btn">Submit Vote</button>
+  </section>
+
+  <section class="section photo-section">
+    <h2>Community & Plant Photos</h2>
+    <img src="https://via.placeholder.com/150/ff7f7f/fff?text=Flower1" alt="Flower1">
+    <img src="https://via.placeholder.com/150/7fbfff/fff?text=Flower2" alt="Flower2">
+    <img src="https://via.placeholder.com/150/7fff7f/fff?text=Flower3" alt="Flower3">
+    <img src="https://via.placeholder.com/150/fff77f/000?text=Flower4" alt="Flower4">
   </section>
 
   <section class="footer">
@@ -44,23 +73,21 @@
   </section>
 
   <script>
-    const colors = ["Red", "Blue", "Green", "Yellow", "Purple"];
+    const colors = ["Red","Blue","Green","Yellow","Purple"];
     const voteSection = document.getElementById("vote-section");
 
     for (let pot = 1; pot <= 5; pot++) {
       const potDiv = document.createElement("div");
       potDiv.className = "pot";
       potDiv.innerHTML = `<h3>Pot ${pot}</h3>`;
-
       const gridDiv = document.createElement("div");
       gridDiv.className = "checkbox-grid";
 
       colors.forEach(color => {
-        for (let i = 0; i < 5; i++) { // 5 repetitions of each color
+        for (let i=0; i<5; i++){
           const id = `pot${pot}_${color}${i}`;
           const label = document.createElement("label");
-          label.htmlFor = id;
-          label.innerHTML = `<input type="checkbox" name="pot${pot}" value="${color}" id="${id}"> ${color}`;
+          label.innerHTML = `<input type="checkbox" name="pot${pot}" value="${color}" id="${id}"><span class="color-box ${color}">${color[0]}</span>`;
           gridDiv.appendChild(label);
         }
       });
@@ -73,7 +100,7 @@
       checkboxes.forEach(cb => {
         cb.addEventListener('change', () => {
           const checked = Array.from(checkboxes).filter(i => i.checked);
-          if (checked.length > 5) cb.checked = false;
+          if(checked.length > 5) cb.checked = false;
         });
       });
     }
