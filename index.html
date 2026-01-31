@@ -3,10 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>$ORGANICLIFE2026 - Flower Voting</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>The Petunia Puzzle Garden</title>
     <style>
         * {
             margin: 0;
@@ -15,19 +12,25 @@
         }
 
         body {
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             min-height: 100vh;
-            color: #333;
-            overflow-x: hidden;
+            color: #2d3748;
         }
 
-        /* Header Section */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
         header {
-            background: linear-gradient(135deg, #a8e6cf 0%, #dcedc1 100%);
-            padding: 60px 20px;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
             position: relative;
             overflow: hidden;
         }
@@ -35,1136 +38,736 @@
         header::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.3) 1px, transparent 1px);
-            background-size: 20px 20px;
-            opacity: 0.5;
-            animation: drift 20s linear infinite;
-        }
-
-        @keyframes drift {
-            from { transform: translate(0, 0); }
-            to { transform: translate(50px, 50px); }
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #e63946, #ff69b4, #f1faee, #7209b7, #c77dad);
         }
 
         h1 {
-            font-size: 3.5rem;
-            font-weight: 900;
-            color: #333;
-            text-shadow: 2px 2px 4px rgba(255,255,255,0.8);
-            margin-bottom: 15px;
-            position: relative;
-            z-index: 1;
-            letter-spacing: 2px;
-        }
-
-        .subtitle {
-            font-size: 1.3rem;
-            color: #2c5f2d;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #1a202c;
             font-weight: 700;
-            position: relative;
-            z-index: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
         }
 
-        .sprout-icon {
-            font-size: 1.5rem;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-
-        /* Main Container */
-        .container {
-            max-width: 1200px;
+        .intro {
+            max-width: 800px;
             margin: 0 auto;
-            padding: 40px 20px;
+            line-height: 1.8;
+            color: #4a5568;
+            font-size: 1.1em;
         }
 
-        /* Voting Section */
-        .voting-section {
-            margin-bottom: 60px;
+        .intro strong {
+            color: #2d3748;
         }
 
-        .section-title {
-            font-size: 2rem;
-            text-align: center;
-            margin-bottom: 40px;
-            color: #2c5f2d;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-
-        .pots-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .pot-card {
-            background: white;
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 3px solid transparent;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .pot-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-        }
-
-        .pot-card.full {
-            border-color: #4caf50;
-            box-shadow: 0 10px 30px rgba(76,175,80,0.3);
-        }
-
-        .pot-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #e0e0e0;
-        }
-
-        .pot-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #555;
-        }
-
-        .pot-counter {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 700;
-            transition: all 0.3s ease;
-        }
-
-        .pot-counter.full {
-            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-            transform: scale(1.1);
-        }
-
-        .colors-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .color-option {
-            display: flex;
-            align-items: center;
-            padding: 12px;
-            border-radius: 12px;
-            background: #f8f9fa;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: 2px solid transparent;
-        }
-
-        .color-option:hover {
-            background: #e9ecef;
-            transform: translateX(5px);
-            border-color: #dee2e6;
-        }
-
-        .color-option.disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            pointer-events: none;
-        }
-
-        .color-box {
-            width: 30px;
-            height: 30px;
-            border-radius: 8px;
-            margin-right: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .color-box::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%);
-            transform: rotate(45deg);
-            transition: all 0.5s;
-        }
-
-        .color-option:hover .color-box::after {
-            transform: translateX(100%) rotate(45deg);
-        }
-
-        .color-red { background: linear-gradient(135deg, #ff6b6b, #ee5a24); }
-        .color-blue { background: linear-gradient(135deg, #4834d4, #686de0); }
-        .color-green { background: linear-gradient(135deg, #00d2d3, #01a3a4); }
-        .color-yellow { background: linear-gradient(135deg, #f9ca24, #f0932b); }
-        .color-purple { background: linear-gradient(135deg, #6c5ce7, #a29bfe); }
-
-        .color-label {
-            flex: 1;
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: #555;
-        }
-
-        .color-count {
-            font-size: 0.8rem;
-            color: #888;
-            margin-right: 10px;
-            font-weight: 700;
-        }
-
-        .color-option input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-            accent-color: #667eea;
-        }
-
-        /* Preview Box */
-        .preview-box {
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
-            border-radius: 15px;
-            padding: 15px;
-            min-height: 80px;
-            border: 2px dashed #ccc;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-
-        .preview-box.has-flowers {
-            border-color: #4caf50;
-            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
-        }
-
-        .flower-preview {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-            position: relative;
-        }
-
-        @keyframes popIn {
-            0% { transform: scale(0) rotate(-180deg); opacity: 0; }
-            100% { transform: scale(1) rotate(0deg); opacity: 1; }
-        }
-
-        .flower-preview::before {
-            content: '🌸';
-        }
-
-        .flower-preview.red { background: #ff6b6b; }
-        .flower-preview.blue { background: #4834d4; }
-        .flower-preview.green { background: #00d2d3; }
-        .flower-preview.yellow { background: #f9ca24; }
-        .flower-preview.purple { background: #6c5ce7; }
-
-        .preview-text {
-            color: #999;
-            font-size: 0.9rem;
-            width: 100%;
-            text-align: center;
-        }
-
-        /* Global Counter */
-        .global-status {
+        .game-section {
             background: white;
             border-radius: 20px;
             padding: 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            margin-bottom: 40px;
-        }
-
-        .global-title {
-            text-align: center;
             margin-bottom: 20px;
-            font-size: 1.3rem;
-            color: #555;
         }
 
-        .global-counters {
+        .game-header {
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
             flex-wrap: wrap;
             gap: 20px;
         }
 
-        .global-item {
-            text-align: center;
-            padding: 15px;
-            border-radius: 15px;
-            background: #f8f9fa;
-            min-width: 80px;
-            transition: all 0.3s ease;
-            border: 3px solid transparent;
+        h2 {
+            color: #2d3748;
+            font-size: 1.8em;
         }
 
-        .global-item.warning {
-            border-color: #f9ca24;
-            background: #fff9e6;
-            animation: pulse 2s infinite;
-        }
-
-        .global-item.danger {
-            border-color: #ff6b6b;
-            background: #ffe6e6;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .global-color-box {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            margin: 0 auto 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        }
-
-        .global-count {
-            font-size: 1.2rem;
-            font-weight: 900;
-            color: #333;
-        }
-
-        .global-label {
-            font-size: 0.8rem;
-            color: #888;
-            margin-top: 5px;
-        }
-
-        /* Wallet Section */
-        .wallet-section {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            margin-bottom: 40px;
-            text-align: center;
-        }
-
-        .wallet-title {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            color: #2c5f2d;
-        }
-
-        .wallet-input-group {
-            max-width: 600px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .wallet-input {
-            width: 100%;
-            padding: 18px 25px;
-            font-size: 1rem;
-            border: 3px solid #e0e0e0;
-            border-radius: 50px;
-            font-family: 'Orbitron', sans-serif;
-            transition: all 0.3s ease;
-            background: #f8f9fa;
-        }
-
-        .wallet-input:focus {
-            outline: none;
-            border-color: #a8e6cf;
-            background: white;
-            box-shadow: 0 0 20px rgba(168,230,207,0.3);
-        }
-
-        .wallet-input.error {
-            border-color: #ff6b6b;
-            animation: shake 0.5s;
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
-        }
-
-        .wallet-note {
-            margin-top: 15px;
-            color: #666;
-            font-size: 0.9rem;
+        .stats {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .wallet-icon {
-            font-size: 1.2rem;
-        }
-
-        /* Submit Button */
-        .submit-section {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .submit-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 20px 60px;
-            font-size: 1.3rem;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(102,126,234,0.4);
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .submit-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: left 0.5s;
-        }
-
-        .submit-btn:hover::before {
-            left: 100%;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(102,126,234,0.5);
-        }
-
-        .submit-btn:active {
-            transform: translateY(-1px);
-        }
-
-        .submit-btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            box-shadow: none;
-        }
-
-        /* Messages */
-        .message {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 20px 30px;
-            border-radius: 15px;
-            color: white;
-            font-weight: 700;
-            z-index: 1000;
-            transform: translateX(400px);
-            transition: transform 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            max-width: 350px;
-        }
-
-        .message.show {
-            transform: translateX(0);
-        }
-
-        .message.success {
-            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-        }
-
-        .message.error {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
-        }
-
-        /* Photo Gallery */
-        .gallery-section {
-            margin-bottom: 60px;
-        }
-
-        .gallery-title {
-            font-size: 2rem;
-            text-align: center;
-            margin-bottom: 40px;
-            color: #2c5f2d;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             gap: 20px;
+            font-weight: 600;
+            color: #4a5568;
         }
 
-        .gallery-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            aspect-ratio: 1;
-            background: #f0f0f0;
+        .stat-item {
+            background: #edf2f7;
+            padding: 10px 20px;
+            border-radius: 10px;
         }
 
-        .gallery-item:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-            z-index: 10;
+        .garden {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
         }
 
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-
-        .gallery-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
-            padding: 20px 10px 10px;
-            color: white;
-            font-size: 0.8rem;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .gallery-item:hover .gallery-overlay {
-            opacity: 1;
-        }
-
-        /* Footer */
-        footer {
-            background: #379683;
-            color: white;
+        .pot-container {
             text-align: center;
-            padding: 40px 20px;
-            font-size: 1.1rem;
-            position: relative;
-            overflow: hidden;
         }
 
-        footer::before {
+        .pot-label {
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #2d3748;
+            font-size: 1.2em;
+        }
+
+        .pot {
+            background: linear-gradient(145deg, #8b4513, #a0522d);
+            border-radius: 0 0 40px 40px;
+            padding: 20px;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            min-height: 100px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.2s;
+        }
+
+        .pot:hover {
+            transform: translateY(-5px);
+        }
+
+        .pot::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #a8e6cf, #dcedc1, #a8e6cf);
-            background-size: 200% 100%;
-            animation: shimmer 3s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-
-        .footer-content {
-            position: relative;
+            top: -10px;
+            left: -5px;
+            right: -5px;
+            height: 20px;
+            background: #654321;
+            border-radius: 50%;
             z-index: 1;
         }
 
-        .footer-text {
-            margin-bottom: 10px;
+        .flower-slot {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            border: 2px dashed rgba(255,255,255,0.4);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 24px;
+            position: relative;
+            z-index: 2;
+            flex-shrink: 0;
+        }
+
+        .flower-slot.filled {
+            border: none;
+            background: transparent;
+            cursor: default;
+        }
+
+        .flower-slot:hover:not(.filled) {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.1);
+        }
+
+        .flower {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            animation: bloom 0.5s ease-out;
+        }
+
+        @keyframes bloom {
+            0% { transform: scale(0) rotate(-180deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        .red { background: radial-gradient(circle at 30% 30%, #ff6b6b, #c92a2a); color: white; }
+        .pink { background: radial-gradient(circle at 30% 30%, #ffb8d9, #d6336c); color: white; }
+        .white { background: radial-gradient(circle at 30% 30%, #ffffff, #dee2e6); color: #495057; border: 1px solid #dee2e6; }
+        .purple { background: radial-gradient(circle at 30% 30%, #da77f2, #862e9c); color: white; }
+        .lilac { background: radial-gradient(circle at 30% 30%, #e9ecef, #9775fa); color: #495057; }
+
+        .controls {
+            background: #f7fafc;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .inventory {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .color-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            padding: 15px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            min-width: 80px;
+        }
+
+        .color-btn:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .color-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            filter: grayscale(0.8);
+        }
+
+        .color-preview {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .count {
+            font-weight: 700;
+            font-size: 1.1em;
+            color: #2d3748;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
             flex-wrap: wrap;
         }
 
-        .sprout-anim {
-            display: inline-block;
-            animation: grow 3s ease-in-out infinite;
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        @keyframes grow {
-            0%, 100% { transform: scale(1) rotate(0deg); }
-            50% { transform: scale(1.2) rotate(10deg); }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .subtitle {
-                font-size: 1rem;
-            }
-            
-            .pots-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .global-counters {
-                gap: 10px;
-            }
-            
-            .global-item {
-                min-width: 60px;
-                padding: 10px;
-            }
-            
-            .wallet-section {
-                padding: 25px;
-            }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
         }
 
-        /* Loading Spinner */
-        .spinner {
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+
+        .btn-secondary:hover {
+            background: #cbd5e0;
+        }
+
+        .feedback {
+            background: #c6f6d5;
+            border-left: 5px solid #48bb78;
+            padding: 20px;
+            border-radius: 0 10px 10px 0;
+            margin-top: 20px;
             display: none;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 1s ease-in-out infinite;
-            margin-left: 10px;
-            vertical-align: middle;
         }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        .feedback.show {
+            display: block;
+            animation: slideIn 0.5s ease-out;
         }
 
-        .submit-btn.loading .spinner {
-            display: inline-block;
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
-        .submit-btn.loading .btn-text {
-            opacity: 0.8;
+        .attempts-list {
+            margin-top: 20px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .attempt {
+            background: #edf2f7;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .win-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .win-modal.show {
+            display: flex;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .win-content {
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            animation: popIn 0.5s;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.5); }
+            80% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .win-content h2 {
+            color: #48bb78;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ffd700;
+            animation: confetti-fall 3s linear infinite;
+        }
+
+        @keyframes confetti-fall {
+            to { transform: translateY(100vh) rotate(360deg); }
+        }
+
+        .hint {
+            font-size: 0.9em;
+            color: #718096;
+            font-style: italic;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8em; }
+            .garden { grid-template-columns: 1fr; }
+            .game-header { flex-direction: column; text-align: center; }
+            .pot { gap: 5px; padding: 15px 10px; }
+            .flower-slot { width: 40px; height: 40px; font-size: 20px; }
+            .flower { font-size: 22px; }
         }
     </style>
+<base target="_blank">
 </head>
 <body>
-
-    <!-- Header -->
-    <header>
-        <h1>$ORGANICLIFE2026</h1>
-        <div class="subtitle">
-            <span>Distribute 5 flowers of each color across 5 pots</span>
-            <span class="sprout-icon">🌱</span>
-        </div>
-    </header>
-
     <div class="container">
-        <!-- Voting Section -->
-        <section class="voting-section">
-            <h2 class="section-title">🌺 Voting Garden 🌺</h2>
-            
-            <!-- Global Color Status -->
-            <div class="global-status">
-                <div class="global-title">Global Color Inventory (Max 5 each)</div>
-                <div class="global-counters">
-                    <div class="global-item" id="global-red">
-                        <div class="global-color-box color-red"></div>
-                        <div class="global-count">0/5</div>
-                        <div class="global-label">Red</div>
-                    </div>
-                    <div class="global-item" id="global-blue">
-                        <div class="global-color-box color-blue"></div>
-                        <div class="global-count">0/5</div>
-                        <div class="global-label">Blue</div>
-                    </div>
-                    <div class="global-item" id="global-green">
-                        <div class="global-color-box color-green"></div>
-                        <div class="global-count">0/5</div>
-                        <div class="global-label">Green</div>
-                    </div>
-                    <div class="global-item" id="global-yellow">
-                        <div class="global-color-box color-yellow"></div>
-                        <div class="global-count">0/5</div>
-                        <div class="global-label">Yellow</div>
-                    </div>
-                    <div class="global-item" id="global-purple">
-                        <div class="global-color-box color-purple"></div>
-                        <div class="global-count">0/5</div>
-                        <div class="global-label">Purple</div>
-                    </div>
+        <header>
+            <h1>🌸 The Petunia Puzzle Garden 🌸</h1>
+            <div class="intro">
+                <p><strong>Welcome to the Petunia Puzzle!</strong> Petunias are beautiful, trumpet-shaped flowering plants native to South America, beloved by gardeners for their vibrant colors and long blooming season.</p>
+                <br>
+                <p><strong>How to Play:</strong> I have secretly planted 25 petunias in 5 pots (5 flowers per pot). There are exactly 5 Red, 5 Pink, 5 White, 5 Purple, and 5 Lilac petunias distributed randomly among the pots. Your mission is to recreate my exact arrangement! Select a pot, then click the color buttons to plant flowers. Watch your inventory—you only have 5 of each color! When all pots are full, submit your guess to see how close you are.</p>
+            </div>
+        </header>
+
+        <div class="game-section">
+            <div class="game-header">
+                <h2>Your Garden</h2>
+                <div class="stats">
+                    <div class="stat-item">Attempts: <span id="attempt-count">0</span></div>
+                    <div class="stat-item">Status: <span id="game-status">Planting...</span></div>
                 </div>
             </div>
 
-            <!-- Pots Grid -->
-            <div class="pots-grid" id="potsContainer">
-                <!-- Pots will be generated by JavaScript -->
+            <div class="garden" id="garden">
+                <!-- Pots will be generated here -->
             </div>
-        </section>
 
-        <!-- Wallet Section -->
-        <section class="wallet-section">
-            <h2 class="wallet-title">💼 Connect Wallet</h2>
-            <div class="wallet-input-group">
-                <input 
-                    type="text" 
-                    class="wallet-input" 
-                    id="walletInput" 
-                    placeholder="Enter your Solana wallet address..."
-                    maxlength="44"
-                >
-                <div class="wallet-note">
-                    <span class="wallet-icon">🔒</span>
-                    <span>No wallet connection required. Only holders of $OrganicLife2026 are eligible to participate.</span>
+            <div class="controls">
+                <h3 style="text-align: center; margin-bottom: 15px; color: #4a5568;">Select a pot above, then choose a color:</h3>
+                <div class="inventory" id="inventory">
+                    <button class="color-btn" data-color="red" onclick="selectColor('red')">
+                        <div class="color-preview red">🌺</div>
+                        <div class="count" id="count-red">5</div>
+                        <div style="font-size: 0.8em; color: #718096;">Red</div>
+                    </button>
+                    <button class="color-btn" data-color="pink" onclick="selectColor('pink')">
+                        <div class="color-preview pink">🌸</div>
+                        <div class="count" id="count-pink">5</div>
+                        <div style="font-size: 0.8em; color: #718096;">Pink</div>
+                    </button>
+                    <button class="color-btn" data-color="white" onclick="selectColor('white')">
+                        <div class="color-preview white">🌼</div>
+                        <div class="count" id="count-white">5</div>
+                        <div style="font-size: 0.8em; color: #718096;">White</div>
+                    </button>
+                    <button class="color-btn" data-color="purple" onclick="selectColor('purple')">
+                        <div class="color-preview purple">🪻</div>
+                        <div class="count" id="count-purple">5</div>
+                        <div style="font-size: 0.8em; color: #718096;">Purple</div>
+                    </button>
+                    <button class="color-btn" data-color="lilac" onclick="selectColor('lilac')">
+                        <div class="color-preview lilac">🌷</div>
+                        <div class="count" id="count-lilac">5</div>
+                        <div style="font-size: 0.8em; color: #718096;">Lilac</div>
+                    </button>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn btn-secondary" onclick="clearCurrentPot()">Clear Selected Pot</button>
+                    <button class="btn btn-secondary" onclick="resetGarden()">Reset All</button>
+                    <button class="btn btn-primary" onclick="checkSolution()" id="check-btn" disabled>Submit Guess</button>
+                </div>
+                
+                <div class="hint" style="text-align: center;">
+                    Click on a pot to select it, then click a color to add a flower. Click a flower in a pot to remove it.
                 </div>
             </div>
-        </section>
 
-        <!-- Submit Section -->
-        <div class="submit-section">
-            <button class="submit-btn" id="submitBtn" onclick="submitVote()">
-                <span class="btn-text">Submit Vote 🌸</span>
-                <div class="spinner"></div>
-            </button>
+            <div class="feedback" id="feedback">
+                <strong>Feedback:</strong> <span id="feedback-text"></span>
+                <div class="attempts-list" id="attempts-list"></div>
+            </div>
         </div>
-
-        <!-- Photo Gallery -->
-        <section class="gallery-section">
-            <h2 class="gallery-title">🌷 Petunia Gallery 🌷</h2>
-            <div class="gallery-grid" id="galleryGrid">
-                <!-- Gallery items will be generated by JavaScript -->
-            </div>
-        </section>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-text">
-                <span>© 2026 $ORGANICLIFE2026.</span>
-                <span>A continuous living meme <span class="sprout-anim">🌱</span></span>
-            </div>
+    <div class="win-modal" id="win-modal">
+        <div class="win-content">
+            <h2>🎉 Congratulations! 🎉</h2>
+            <p style="font-size: 1.2em; margin-bottom: 20px;">You solved the Petunia Puzzle!</p>
+            <p id="win-stats"></p>
+            <button class="btn btn-primary" onclick="newGame()" style="margin-top: 20px;">Play Again</button>
         </div>
-    </footer>
-
-    <!-- Message Container -->
-    <div id="messageContainer"></div>
-
-    <!-- Hidden Form for Formspree -->
-    <form id="hiddenForm" action="https://formspree.io/f/xbdkrlao" method="POST" style="display: none;">
-        <input type="text" name="wallet" id="formWallet">
-        <input type="text" name="pot1" id="formPot1">
-        <input type="text" name="pot2" id="formPot2">
-        <input type="text" name="pot3" id="formPot3">
-        <input type="text" name="pot4" id="formPot4">
-        <input type="text" name="pot5" id="formPot5">
-        <input type="text" name="timestamp" id="formTimestamp">
-    </form>
+    </div>
 
     <script>
-        // Configuration
-        const COLORS = [
-            { id: 'red', name: 'Red', class: 'color-red' },
-            { id: 'blue', name: 'Blue', class: 'color-blue' },
-            { id: 'green', name: 'Green', class: 'color-green' },
-            { id: 'yellow', name: 'Yellow', class: 'color-yellow' },
-            { id: 'purple', name: 'Purple', class: 'color-purple' }
-        ];
-        
-        const NUM_POTS = 5;
-        const MAX_PER_POT = 5;
+        const COLORS = ['red', 'pink', 'white', 'purple', 'lilac'];
+        const EMOJIS = { red: '🌺', pink: '🌸', white: '🌼', purple: '🪻', lilac: '🌷' };
         const MAX_PER_COLOR = 5;
+        const POTS_COUNT = 5;
+        const FLOWERS_PER_POT = 5;
 
-        // State management
-        let potSelections = {};
-        let globalColorCount = {};
-        
-        // Initialize state
-        function initializeState() {
-            for (let i = 1; i <= NUM_POTS; i++) {
-                potSelections[i] = [];
-            }
+        let solution = [];
+        let currentPots = [[], [], [], [], []];
+        let inventory = { red: 5, pink: 5, white: 5, purple: 5, lilac: 5 };
+        let selectedPot = 0;
+        let attempts = 0;
+
+        function initGame() {
+            generateSolution();
+            renderPots();
+            updateInventoryDisplay();
+            document.getElementById('attempt-count').textContent = '0';
+            document.getElementById('game-status').textContent = 'Planting...';
+            document.getElementById('feedback').classList.remove('show');
+            document.getElementById('attempts-list').innerHTML = '';
+            document.getElementById('win-modal').classList.remove('show');
+            attempts = 0;
+        }
+
+        function generateSolution() {
+            solution = [[], [], [], [], []];
+            let available = [];
+            
+            // Create pool of flowers
             COLORS.forEach(color => {
-                globalColorCount[color.id] = 0;
+                for (let i = 0; i < MAX_PER_COLOR; i++) {
+                    available.push(color);
+                }
             });
+
+            // Shuffle and distribute
+            available.sort(() => Math.random() - 0.5);
+            
+            for (let pot = 0; pot < POTS_COUNT; pot++) {
+                for (let flower = 0; flower < FLOWERS_PER_POT; flower++) {
+                    solution[pot].push(available.pop());
+                }
+            }
         }
 
-        // Generate pots HTML
-        function generatePots() {
-            const container = document.getElementById('potsContainer');
-            
-            for (let i = 1; i <= NUM_POTS; i++) {
+        function renderPots() {
+            const garden = document.getElementById('garden');
+            garden.innerHTML = '';
+
+            for (let i = 0; i < POTS_COUNT; i++) {
                 const potDiv = document.createElement('div');
-                potDiv.className = 'pot-card';
-                potDiv.id = `pot-${i}`;
+                potDiv.className = 'pot-container';
                 
-                let colorsHtml = '';
-                COLORS.forEach(color => {
-                    colorsHtml += `
-                        <label class="color-option" id="pot${i}-${color.id}-label">
-                            <div class="color-box ${color.class}"></div>
-                            <span class="color-label">${color.name}</span>
-                            <span class="color-count" id="pot${i}-${color.id}-count"></span>
-                            <input type="checkbox" 
-                                   id="pot${i}-${color.id}" 
-                                   onchange="handleColorToggle(${i}, '${color.id}')"
-                                   data-pot="${i}" 
-                                   data-color="${color.id}">
-                        </label>
-                    `;
-                });
-                
-                potDiv.innerHTML = `
-                    <div class="pot-header">
-                        <div class="pot-title">🪴 Pot ${i}</div>
-                        <div class="pot-counter" id="pot${i}-counter">0/5</div>
-                    </div>
-                    <div class="colors-grid">
-                        ${colorsHtml}
-                    </div>
-                    <div class="preview-box" id="pot${i}-preview">
-                        <span class="preview-text">Select flowers to see preview...</span>
-                    </div>
-                    <input type="hidden" name="pot${i}_data" id="pot${i}-hidden" value="">
-                `;
-                
-                container.appendChild(potDiv);
-            }
-        }
-
-        // Generate gallery
-        function generateGallery() {
-            const container = document.getElementById('galleryGrid');
-            const petuniaColors = ['pink', 'purple', 'red', 'white', 'blue', 'yellow', 'mixed'];
-            
-            for (let i = 1; i <= 12; i++) {
-                const color = petuniaColors[i % petuniaColors.length];
-                const div = document.createElement('div');
-                div.className = 'gallery-item';
-                div.innerHTML = `
-                    <img src="https://images.unsplash.com/photo-${getPetuniaImageId(i)}?w=300&h=300&fit=crop" 
-                         alt="Petunia ${color}" 
-                         loading="lazy"
-                         onerror="this.src='https://placehold.co/150x150/dcEDC1/333?text=Petunia+${i}'">
-                    <div class="gallery-overlay">Petunia ${color.charAt(0).toUpperCase() + color.slice(1)} 🌸</div>
-                `;
-                container.appendChild(div);
-            }
-        }
-
-        function getPetuniaImageId(index) {
-            // Using specific Unsplash image IDs for petunia-like flowers
-            const ids = [
-                '1558293842-c3558a1cb5dd',
-                '1490750967868-58cb75069ed6',
-                '1518709766631-a6bf5e3e6f7f',
-                '1455659817276-f0a462a3d56f',
-                '1463936575229-48b785116f0f',
-                '1496062033456-0243628775a6',
-                '1518882605630-8995b47b1b74',
-                '1525310072747-f58fc21056e7',
-                '1463320898484-cdee814a96e6',
-                '1501004318641-b39e6451bec6',
-                '1459411552884-841db9b3cc2a',
-                '1465146344425-f00d5f5c8f07'
-            ];
-            return ids[index - 1] || ids[0];
-        }
-
-        // Handle color selection
-        function handleColorToggle(potId, colorId) {
-            const checkbox = document.getElementById(`pot${potId}-${colorId}`);
-            const isChecked = checkbox.checked;
-            
-            if (isChecked) {
-                // Check pot limit
-                if (potSelections[potId].length >= MAX_PER_POT) {
-                    showMessage(`Pot ${potId} already has ${MAX_PER_POT} flowers!`, 'error');
-                    checkbox.checked = false;
-                    return;
+                const label = document.createElement('div');
+                label.className = 'pot-label';
+                label.textContent = `Pot ${i + 1}`;
+                if (i === selectedPot) {
+                    label.style.color = '#667eea';
+                    label.textContent += ' ✓';
                 }
                 
-                // Check global limit
-                if (globalColorCount[colorId] >= MAX_PER_COLOR) {
-                    showMessage(`Global limit reached for ${COLORS.find(c => c.id === colorId).name} (max ${MAX_PER_COLOR})`, 'error');
-                    checkbox.checked = false;
-                    return;
+                const pot = document.createElement('div');
+                pot.className = 'pot';
+                pot.onclick = () => selectPot(i);
+                if (i === selectedPot) {
+                    pot.style.boxShadow = '0 0 0 4px #667eea, 0 5px 15px rgba(0,0,0,0.2)';
                 }
-                
-                // Add to selections
-                potSelections[potId].push(colorId);
-                globalColorCount[colorId]++;
-                
-                // Add animation effect
-                animateFlowerGrowth(potId, colorId);
-            } else {
-                // Remove from selections
-                const index = potSelections[potId].indexOf(colorId);
-                if (index > -1) {
-                    potSelections[potId].splice(index, 1);
-                    globalColorCount[colorId]--;
-                }
-            }
-            
-            updateUI();
-        }
 
-        // Animate flower growing
-        function animateFlowerGrowth(potId, colorId) {
-            const preview = document.getElementById(`pot${potId}-preview`);
-            const flower = document.createElement('div');
-            flower.className = `flower-preview ${colorId}`;
-            flower.style.animation = 'popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-            preview.appendChild(flower);
-            
-            setTimeout(() => {
-                updatePreview(potId);
-            }, 500);
-        }
-
-        // Update all UI elements
-        function updateUI() {
-            // Update each pot
-            for (let i = 1; i <= NUM_POTS; i++) {
-                updatePotUI(i);
-            }
-            
-            // Update global counters
-            updateGlobalUI();
-        }
-
-        function updatePotUI(potId) {
-            const count = potSelections[potId].length;
-            const counterEl = document.getElementById(`pot${potId}-counter`);
-            const potCard = document.getElementById(`pot-${potId}`);
-            
-            counterEl.textContent = `${count}/${MAX_PER_POT}`;
-            
-            if (count === MAX_PER_POT) {
-                counterEl.classList.add('full');
-                potCard.classList.add('full');
-            } else {
-                counterEl.classList.remove('full');
-                potCard.classList.remove('full');
-            }
-            
-            // Update preview
-            updatePreview(potId);
-            
-            // Update hidden input
-            document.getElementById(`pot${potId}-hidden`).value = potSelections[potId].join(',');
-            
-            // Update checkboxes availability
-            COLORS.forEach(color => {
-                const checkbox = document.getElementById(`pot${potId}-${color.id}`);
-                const label = document.getElementById(`pot${potId}-${color.id}-label`);
-                
-                if (!checkbox.checked) {
-                    if (count >= MAX_PER_POT || globalColorCount[color.id] >= MAX_PER_COLOR) {
-                        label.classList.add('disabled');
-                        checkbox.disabled = true;
+                // Create flower slots
+                for (let j = 0; j < FLOWERS_PER_POT; j++) {
+                    const slot = document.createElement('div');
+                    slot.className = 'flower-slot';
+                    
+                    if (currentPots[i][j]) {
+                        slot.className += ' filled';
+                        const flower = document.createElement('div');
+                        flower.className = `flower ${currentPots[i][j]}`;
+                        flower.textContent = EMOJIS[currentPots[i][j]];
+                        flower.onclick = (e) => {
+                            e.stopPropagation();
+                            removeFlower(i, j);
+                        };
+                        slot.appendChild(flower);
                     } else {
-                        label.classList.remove('disabled');
-                        checkbox.disabled = false;
+                        slot.textContent = '+';
+                        slot.onclick = (e) => {
+                            e.stopPropagation();
+                            selectPot(i);
+                        };
+                    }
+                    
+                    pot.appendChild(slot);
+                }
+                
+                potDiv.appendChild(label);
+                potDiv.appendChild(pot);
+                garden.appendChild(potDiv);
+            }
+
+            updateCheckButton();
+        }
+
+        function selectPot(index) {
+            selectedPot = index;
+            renderPots();
+        }
+
+        function selectColor(color) {
+            if (inventory[color] <= 0) return;
+            
+            const pot = currentPots[selectedPot];
+            if (pot.length >= FLOWERS_PER_POT) {
+                // Find next available pot
+                let found = false;
+                for (let i = 0; i < POTS_COUNT; i++) {
+                    if (currentPots[i].length < FLOWERS_PER_POT) {
+                        selectedPot = i;
+                        currentPots[selectedPot].push(color);
+                        inventory[color]--;
+                        found = true;
+                        break;
                     }
                 }
-            });
-        }
-
-        function updatePreview(potId) {
-            const preview = document.getElementById(`pot${potId}-preview`);
-            const colors = potSelections[potId];
-            
-            if (colors.length === 0) {
-                preview.innerHTML = '<span class="preview-text">Select flowers to see preview...</span>';
-                preview.classList.remove('has-flowers');
+                if (!found) return;
             } else {
-                preview.classList.add('has-flowers');
-                preview.innerHTML = '';
-                colors.forEach(colorId => {
-                    const flower = document.createElement('div');
-                    flower.className = `flower-preview ${colorId}`;
-                    preview.appendChild(flower);
-                });
+                pot.push(color);
+                inventory[color]--;
+            }
+            
+            renderPots();
+            updateInventoryDisplay();
+            
+            // Auto-select next pot if current is full
+            if (currentPots[selectedPot].length >= FLOWERS_PER_POT) {
+                for (let i = 0; i < POTS_COUNT; i++) {
+                    if (currentPots[i].length < FLOWERS_PER_POT) {
+                        selectedPot = i;
+                        renderPots();
+                        break;
+                    }
+                }
             }
         }
 
-        function updateGlobalUI() {
-            COLORS.forEach(color => {
-                const count = globalColorCount[color.id];
-                const el = document.getElementById(`global-${color.id}`);
-                const countEl = el.querySelector('.global-count');
-                
-                countEl.textContent = `${count}/${MAX_PER_COLOR}`;
-                
-                el.classList.remove('warning', 'danger');
-                if (count === MAX_PER_COLOR) {
-                    el.classList.add('danger');
-                } else if (count >= 3) {
-                    el.classList.add('warning');
-                }
+        function removeFlower(potIndex, flowerIndex) {
+            const color = currentPots[potIndex][flowerIndex];
+            currentPots[potIndex].splice(flowerIndex, 1);
+            inventory[color]++;
+            renderPots();
+            updateInventoryDisplay();
+        }
+
+        function clearCurrentPot() {
+            const flowers = currentPots[selectedPot];
+            flowers.forEach(color => {
+                inventory[color]++;
             });
+            currentPots[selectedPot] = [];
+            renderPots();
+            updateInventoryDisplay();
         }
 
-        // Show message
-        function showMessage(text, type) {
-            const container = document.getElementById('messageContainer');
-            const msg = document.createElement('div');
-            msg.className = `message ${type}`;
-            msg.textContent = text;
-            container.appendChild(msg);
-            
-            setTimeout(() => msg.classList.add('show'), 100);
-            
-            setTimeout(() => {
-                msg.classList.remove('show');
-                setTimeout(() => msg.remove(), 300);
-            }, 3000);
+        function resetGarden() {
+            currentPots = [[], [], [], [], []];
+            inventory = { red: 5, pink: 5, white: 5, purple: 5, lilac: 5 };
+            selectedPot = 0;
+            renderPots();
+            updateInventoryDisplay();
+            document.getElementById('feedback').classList.remove('show');
         }
 
-        // Submit vote
-        function submitVote() {
-            const btn = document.getElementById('submitBtn');
-            const walletInput = document.getElementById('walletInput');
-            
-            // Validate wallet
-            const wallet = walletInput.value.trim();
-            if (!wallet) {
-                walletInput.classList.add('error');
-                showMessage('Please enter your Solana wallet address!', 'error');
-                setTimeout(() => walletInput.classList.remove('error'), 500);
-                return;
-            }
-            
-            // Validate each pot has exactly 5 flowers
-            let valid = true;
-            for (let i = 1; i <= NUM_POTS; i++) {
-                if (potSelections[i].length !== MAX_PER_POT) {
-                    showMessage(`Pot ${i} must have exactly ${MAX_PER_POT} flowers!`, 'error');
-                    valid = false;
-                    break;
-                }
-            }
-            
-            if (!valid) return;
-            
-            // Check all global limits respected
+        function updateInventoryDisplay() {
             COLORS.forEach(color => {
-                if (globalColorCount[color.id] > MAX_PER_COLOR) {
-                    showMessage(`Global limit exceeded for ${color.name}!`, 'error');
-                    valid = false;
-                }
-            });
-            
-            if (!valid) return;
-            
-            // Set loading state
-            btn.classList.add('loading');
-            btn.disabled = true;
-            
-            // Populate hidden form
-            document.getElementById('formWallet').value = wallet;
-            for (let i = 1; i <= NUM_POTS; i++) {
-                document.getElementById(`formPot${i}`).value = potSelections[i].join(',');
-            }
-            document.getElementById('formTimestamp').value = new Date().toISOString();
-            
-            // Submit to Formspree
-            const form = document.getElementById('hiddenForm');
-            const formData = new FormData(form);
-            
-            fetch(form.action, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            })
-            .then(response => {
-                if (response.ok) {
-                    showMessage('🌸 Vote submitted successfully! Thank you for participating! 🌸', 'success');
-                    // Reset form
-                    setTimeout(() => {
-                        resetForm();
-                    }, 2000);
+                const btn = document.querySelector(`[data-color="${color}"]`);
+                const count = document.getElementById(`count-${color}`);
+                count.textContent = inventory[color];
+                
+                if (inventory[color] <= 0) {
+                    btn.disabled = true;
                 } else {
-                    throw new Error('Submission failed');
+                    btn.disabled = false;
                 }
-            })
-            .catch(error => {
-                showMessage('Error submitting vote. Please try again.', 'error');
-            })
-            .finally(() => {
-                btn.classList.remove('loading');
-                btn.disabled = false;
             });
         }
 
-        function resetForm() {
-            // Reset all checkboxes
-            document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-                cb.checked = false;
-                cb.disabled = false;
-            });
-            
-            // Reset state
-            initializeState();
-            
-            // Reset UI
-            document.querySelectorAll('.color-option').forEach(el => el.classList.remove('disabled'));
-            updateUI();
-            
-            // Clear wallet
-            document.getElementById('walletInput').value = '';
+        function updateCheckButton() {
+            const allFull = currentPots.every(pot => pot.length === FLOWERS_PER_POT);
+            const checkBtn = document.getElementById('check-btn');
+            checkBtn.disabled = !allFull;
         }
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            initializeState();
-            generatePots();
-            generateGallery();
+        function checkSolution() {
+            attempts++;
+            document.getElementById('attempt-count').textContent = attempts;
             
-            // Remove error class on input
-            document.getElementById('walletInput').addEventListener('input', function() {
-                this.classList.remove('error');
-            });
-        });
+            let correctPositions = 0;
+            let correctColors = 0;
+            const feedback = [];
+
+            // Check each pot
+            for (let i = 0; i < POTS_COUNT; i++) {
+                const potCorrect = [];
+                const potGuess = [...currentPots[i]];
+                const potSolution = [...solution[i]];
+                
+                // Check exact positions
+                for (let j = 0; j < FLOWERS_PER_POT; j++) {
+                    if (potGuess[j] === potSolution[j]) {
+                        correctPositions++;
+                        potCorrect.push(j);
+                        potGuess[j] = null;
+                        potSolution[j] = null;
+                    }
+                }
+                
+                // Check remaining colors (right color, wrong position)
+                const guessRemaining = potGuess.filter(x => x !== null);
+                const solutionRemaining = potSolution.filter(x => x !== null);
+                
+                guessRemaining.forEach(color => {
+                    const idx = solutionRemaining.indexOf(color);
+                    if (idx !== -1) {
+                        correctColors++;
+                        solutionRemaining.splice(idx, 1);
+                    }
+                });
+
+                if (potCorrect.length === FLOWERS_PER_POT) {
+                    feedback.push(`Pot ${i+1}: Perfect! 🎯`);
+                } else {
+                    feedback.push(`Pot ${i+1}: ${potCorrect.length} exact matches`);
+                }
+            }
+
+            // Check if won
+            if (correctPositions === 25) {
+                document.getElementById('game-status').textContent = 'Solved!';
+                document.getElementById('win-stats').textContent = `You solved it in ${attempts} attempts!`;
+                document.getElementById('win-modal').classList.add('show');
+                createConfetti();
+            } else {
+                document.getElementById('game-status').textContent = 'Keep trying...';
+                const feedbackDiv = document.getElementById('feedback');
+                const feedbackText = document.getElementById('feedback-text');
+                const attemptsList = document.getElementById('attempts-list');
+                
+                feedbackText.innerHTML = `Attempt #${attempts}: ${correctPositions} flowers in correct position, ${correctColors} correct colors in wrong position.`;
+                
+                const attemptDiv = document.createElement('div');
+                attemptDiv.className = 'attempt';
+                attemptDiv.innerHTML = `
+                    <span>Attempt #${attempts}</span>
+                    <span>${correctPositions}/25 correct positions</span>
+                `;
+                attemptsList.insertBefore(attemptDiv, attemptsList.firstChild);
+                
+                feedbackDiv.classList.add('show');
+            }
+        }
+
+        function createConfetti() {
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = ['#e63946', '#ff69b4', '#f1faee', '#7209b7', '#c77dad'][Math.floor(Math.random() * 5)];
+                confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                confetti.style.opacity = Math.random();
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), 4000);
+            }
+        }
+
+        function newGame() {
+            currentPots = [[], [], [], [], []];
+            inventory = { red: 5, pink: 5, white: 5, purple: 5, lilac: 5 };
+            selectedPot = 0;
+            initGame();
+        }
+
+        // Initialize on load
+        window.onload = initGame;
     </script>
 </body>
 </html>
