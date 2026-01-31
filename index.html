@@ -3,22 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>$ORGANICLIFE Color Voting</title>
+  <title>$ORGANICLIFE2026 Voting</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Orbitron', sans-serif; }
-    body { 
-      background: linear-gradient(180deg, #a8e6cf, #dcedc1); 
-      color: #333;
-      min-height: 100vh;
-    }
-    header { 
-      padding: 2rem; 
-      text-align: center; 
-      background: #379683; 
-      box-shadow: 0 2px 10px rgba(0,0,0,0.3); 
-      color: #fff;
-    }
+    body { background: linear-gradient(180deg, #a8e6cf, #dcedc1); color: #333; min-height: 100vh; }
+    header { padding: 2rem; text-align: center; background: #379683; color: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
     header h1 { font-size: 3rem; }
     header p { font-size: 1.2rem; }
     .section { padding: 3rem 2rem; text-align: center; }
@@ -51,7 +41,7 @@
 </head>
 <body>
   <header>
-    <h1>$ORGANICLIFE</h1>
+    <h1>$ORGANICLIFE2026</h1>
     <p>Vote which colors go into each pot 🌱 (select 5 colors per pot)</p>
   </header>
 
@@ -59,8 +49,7 @@
     <h2>Choose Colors for Each Pot</h2>
     <p>Select exactly 5 colors for each pot (5 colors x 5 repetitions = 25 boxes per pot)</p>
     
-    <!-- Formulário para integração com Formspree -->
-    <form id="vote-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <form id="vote-form" action="https://formspree.io/f/xbdkrlao" method="POST">
       <div class="vote-section" id="vote-section"></div>
 
       <div class="wallet-input">
@@ -89,7 +78,7 @@
   </section>
 
   <section class="footer">
-    <p>&copy; 2026 $ORGANICLIFE. A continuous living meme 🌱</p>
+    <p>&copy; 2026 $ORGANICLIFE2026. A continuous living meme 🌱</p>
   </section>
 
   <script>
@@ -164,7 +153,6 @@
           errorMsg.textContent = `Error: You must select exactly 5 colors for Pot ${pot}!`;
           return;
         }
-        // Preenche os inputs escondidos para envio via Formspree
         document.getElementById(`pot${pot}_votes`).value = Array.from(checked).map(c=>c.value).join(", ");
       }
 
