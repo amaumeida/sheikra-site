@@ -1,60 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>$ORGANICLIFE2026 Voting</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Orbitron', sans-serif; }
-    body { background: linear-gradient(180deg, #a8e6cf, #dcedc1); color: #333; min-height: 100vh; }
-    header { padding: 2rem; text-align: center; background: #379683; color: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
-    header h1 { font-size: 3rem; }
-    header p { font-size: 1.2rem; }
-    .section { padding: 3rem 2rem; text-align: center; }
-    .section h2 { font-size: 2rem; margin-bottom: 1rem; color: #ff6f61; }
-    .vote-section { display: flex; flex-direction: column; align-items: center; gap: 2rem; margin-top: 2rem; }
-    .pot { background: #ffffffaa; padding: 1rem; border-radius: 10px; width: 360px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
-    .pot h3 { margin-bottom: 1rem; text-align: center; color: #222; }
-    .preview { display:flex; justify-content:center; gap:5px; margin-bottom:10px; }
-    .checkbox-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.5rem; }
-    label { display: flex; justify-content: center; align-items: center; padding: 0.4rem; border-radius: 6px; cursor: pointer; font-size: 0.9rem; color: #fff; font-weight: bold; }
-    input[type="checkbox"] { display: none; }
-    input[type="checkbox"]:checked + span { border: 2px solid #333; transform: scale(1.1); }
-    .color-box { width: 40px; height: 40px; border-radius: 6px; display: flex; justify-content: center; align-items: center; color: #fff; font-weight: bold; transition: transform 0.2s, border 0.2s; }
-    .Red { background-color: #e74c3c; }
-    .Blue { background-color: #3498db; }
-    .Green { background-color: #2ecc71; }
-    .Yellow { background-color: #f1c40f; color: #000; }
-    .Purple { background-color: #9b59b6; }
-    .btn { margin-top: 1rem; padding: 0.8rem 2rem; background: #ff6f61; color: #fff; font-weight: bold; border-radius: 8px; cursor: pointer; transition: 0.3s; border: none; }
-    .btn:hover { background: #ff3b2e; transform: scale(1.05); }
-    .footer { background: #379683; padding: 2rem; font-size: 0.9rem; color: #fff; text-align: center; margin-top: 3rem; }
-    .photo-section { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-top: 2rem; }
-    .photo-section img { width: 150px; height: 150px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
-    .wallet-input { margin-top: 2rem; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
-    .wallet-input input { padding: 0.6rem; width: 300px; border-radius: 6px; border: 1px solid #999; font-size: 1rem; }
-    .wallet-input p { font-size: 0.9rem; color: #555; max-width: 350px; text-align: center; }
-    .error-msg { color: #ff0000; font-weight: bold; margin-top: 1rem; }
-    .success-msg { color: #00aa00; font-weight: bold; margin-top: 1rem; }
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Orbitron',sans-serif; }
+    body { background: linear-gradient(180deg, #a8e6cf, #dcedc1); color:#333; min-height:100vh; }
+    header { padding:2rem; text-align:center; background:#379683; color:#fff; box-shadow:0 2px 10px rgba(0,0,0,0.3); }
+    header h1 { font-size:3rem; }
+    header p { font-size:1.2rem; }
+    .section { padding:3rem 2rem; text-align:center; }
+    .section h2 { font-size:2rem; margin-bottom:1rem; color:#ff6f61; }
+    .vote-section { display:flex; flex-direction:column; align-items:center; gap:2rem; margin-top:2rem; }
+    .pot { background:#ffffffaa; padding:1rem; border-radius:10px; width:360px; box-shadow:0 4px 12px rgba(0,0,0,0.2); }
+    .pot h3 { margin-bottom:1rem; text-align:center; color:#222; }
+    .checkbox-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:0.5rem; }
+    label { display:flex; justify-content:center; align-items:center; padding:0.4rem; border-radius:6px; cursor:pointer; font-size:0.9rem; color:#fff; font-weight:bold; }
+    input[type="checkbox"] { display:none; }
+    input[type="checkbox"]:checked + span { border:2px solid #333; transform:scale(1.1); }
+    .color-box { width:40px; height:40px; border-radius:6px; display:flex; justify-content:center; align-items:center; color:#fff; font-weight:bold; transition:transform 0.2s, border 0.2s; }
+    .Red { background-color:#e74c3c; }
+    .Blue { background-color:#3498db; }
+    .Green { background-color:#2ecc71; }
+    .Yellow { background-color:#f1c40f; color:#000; }
+    .Purple { background-color:#9b59b6; }
+    .btn { margin-top:1rem; padding:0.8rem 2rem; background:#ff6f61; color:#fff; font-weight:bold; border-radius:8px; cursor:pointer; transition:0.3s; border:none; }
+    .btn:hover { background:#ff3b2e; transform:scale(1.05); }
+    .footer { background:#379683; padding:2rem; font-size:0.9rem; color:#fff; text-align:center; margin-top:3rem; }
+    .wallet-input { margin-top:2rem; display:flex; flex-direction:column; align-items:center; gap:0.5rem; }
+    .wallet-input input { padding:0.6rem; width:300px; border-radius:6px; border:1px solid #999; font-size:1rem; }
+    .wallet-input p { font-size:0.9rem; color:#555; max-width:350px; text-align:center; }
+    .error-msg { color:#ff0000; font-weight:bold; margin-top:1rem; }
+    .success-msg { color:#00aa00; font-weight:bold; margin-top:1rem; }
   </style>
 </head>
 <body>
   <header>
     <h1>$ORGANICLIFE2026</h1>
-    <p>Vote which colors go into each pot 🌱 (select 5 colors per pot, max 5 per color globally)</p>
+    <p>Distribute 5 flowers of each color across 5 pots 🌱</p>
   </header>
 
   <section class="section">
-    <h2>Choose Colors for Each Pot</h2>
-    <p>Select exactly 5 colors per pot. No color can be used more than 5 times total across all pots.</p>
-    
+    <h2>Vote Which Colors Go Into Each Pot</h2>
     <form id="vote-form" action="https://formspree.io/f/xbdkrlao" method="POST">
       <div class="vote-section" id="vote-section"></div>
 
       <div class="wallet-input">
-        <input type="text" name="wallet" id="sol-wallet" placeholder="Enter your Solana wallet address" required />
-        <p>No wallet connection required. Only holders of <strong>$OrganicLife2026</strong> are eligible to participate.</p>
+        <input type="text" name="wallet" id="sol-wallet" placeholder="Enter your Solana wallet address" required>
+        <p>No wallet connection required. Only holders of <strong>$OrganicLife2026</strong> are eligible.</p>
       </div>
 
       <input type="hidden" name="pot1_votes" id="pot1_votes">
@@ -63,18 +58,10 @@
       <input type="hidden" name="pot4_votes" id="pot4_votes">
       <input type="hidden" name="pot5_votes" id="pot5_votes">
 
-      <button type="submit" class="btn" id="submitBtn">Submit Vote</button>
+      <button type="submit" class="btn">Submit Vote</button>
       <div class="error-msg" id="error-msg"></div>
       <div class="success-msg" id="success-msg"></div>
     </form>
-  </section>
-
-  <section class="section photo-section">
-    <h2>Community & Plant Photos</h2>
-    <img src="https://via.placeholder.com/150/ff7f7f/fff?text=Flower1" alt="Flower1">
-    <img src="https://via.placeholder.com/150/7fbfff/fff?text=Flower2" alt="Flower2">
-    <img src="https://via.placeholder.com/150/7fff7f/fff?text=Flower3" alt="Flower3">
-    <img src="https://via.placeholder.com/150/fff77f/000?text=Flower4" alt="Flower4">
   </section>
 
   <section class="footer">
@@ -83,63 +70,59 @@
 
   <script>
     const colors = ["Red","Blue","Green","Yellow","Purple"];
+    const totalPerColor = 5; // total global
+    const numPots = 5;
     const voteSection = document.getElementById("vote-section");
 
-    // Contador global de cores
-    const globalColorCount = { Red:0, Blue:0, Green:0, Yellow:0, Purple:0 };
+    // Contador global inicial
+    const globalCount = { Red:0, Blue:0, Green:0, Yellow:0, Purple:0 };
 
-    for (let pot = 1; pot <= 5; pot++) {
+    for(let pot=1; pot<=numPots; pot++){
       const potDiv = document.createElement("div");
       potDiv.className = "pot";
       potDiv.innerHTML = `<h3>Pot ${pot}</h3><div class="preview" id="preview-pot${pot}"></div>`;
-      const gridDiv = document.createElement("div");
-      gridDiv.className = "checkbox-grid";
+      const grid = document.createElement("div");
+      grid.className="checkbox-grid";
 
-      colors.forEach(color => {
-        for (let i=0; i<5; i++){
-          const id = `pot${pot}_${color}${i}`;
+      colors.forEach(color=>{
+        for(let i=0;i<5;i++){
+          const id=`pot${pot}_${color}${i}`;
           const label = document.createElement("label");
           label.innerHTML = `<input type="checkbox" name="pot${pot}" value="${color}" id="${id}"><span class="color-box ${color}">${color[0]}</span>`;
-          gridDiv.appendChild(label);
+          grid.appendChild(label);
         }
       });
 
-      potDiv.appendChild(gridDiv);
+      potDiv.appendChild(grid);
       voteSection.appendChild(potDiv);
 
-      // Limite por pote + global
       const checkboxes = potDiv.querySelectorAll(`input[name=pot${pot}]`);
-      const previewDiv = document.getElementById(`preview-pot${pot}`);
+      const preview = document.getElementById(`preview-pot${pot}`);
 
-      checkboxes.forEach(cb => {
-        cb.addEventListener('change', () => {
-          const checkedPot = Array.from(checkboxes).filter(i => i.checked);
+      checkboxes.forEach(cb=>{
+        cb.addEventListener('change',()=>{
+          const checkedPot = Array.from(checkboxes).filter(i=>i.checked);
+          if(checkedPot.length>5){ cb.checked=false; return; }
 
-          // Bloqueia se ultrapassar 5 por pote
-          if(checkedPot.length > 5){
-            cb.checked = false; 
-            return;
-          }
-
-          // Conta globalmente
-          const currentGlobalCount = { Red:0, Blue:0, Green:0, Yellow:0, Purple:0 };
+          // Contagem global
+          const currentGlobal = { Red:0, Blue:0, Green:0, Yellow:0, Purple:0 };
           const allChecked = document.querySelectorAll("input[type=checkbox]:checked");
-          allChecked.forEach(c => currentGlobalCount[c.value]++);
+          allChecked.forEach(c=>currentGlobal[c.value]++);
 
-          if(currentGlobalCount[cb.value] > 5){
-            cb.checked = false;
-            alert(`You can only use ${cb.value} up to 5 times globally!`);
+          if(currentGlobal[cb.value]>totalPerColor){
+            cb.checked=false;
+            alert(`You can only use ${cb.value} up to ${totalPerColor} times globally!`);
             return;
           }
 
-          // Atualiza preview
-          previewDiv.innerHTML = "";
-          checkedPot.forEach(chk => {
-            const colorBox = document.createElement("div");
-            colorBox.className = `color-box ${chk.value}`;
-            colorBox.style.width = "30px";
-            colorBox.style.height = "30px";
-            previewDiv.appendChild(colorBox);
+          // Atualiza preview do pote
+          preview.innerHTML="";
+          checkedPot.forEach(chk=>{
+            const box=document.createElement("div");
+            box.className=`color-box ${chk.value}`;
+            box.style.width="30px";
+            box.style.height="30px";
+            preview.appendChild(box);
           });
         });
       });
@@ -149,27 +132,21 @@
     const errorMsg = document.getElementById("error-msg");
     const successMsg = document.getElementById("success-msg");
 
-    voteForm.addEventListener("submit", function(e){
+    voteForm.addEventListener("submit", e=>{
       e.preventDefault();
-      errorMsg.textContent = "";
-      successMsg.textContent = "";
+      errorMsg.textContent="";
+      successMsg.textContent="";
 
       const wallet = document.getElementById("sol-wallet").value.trim();
-      if(!wallet){
-        errorMsg.textContent = "Error: Please enter your Solana wallet address!";
-        return;
+      if(!wallet){ errorMsg.textContent="Error: Please enter your Solana wallet address!"; return; }
+
+      for(let pot=1;pot<=numPots;pot++){
+        const checked=document.querySelectorAll(`input[name=pot${pot}]:checked`);
+        if(checked.length>5){ errorMsg.textContent=`Error: You can select max 5 colors per pot!`; return; }
+        document.getElementById(`pot${pot}_votes`).value=Array.from(checked).map(c=>c.value).join(", ");
       }
 
-      for(let pot=1; pot<=5; pot++){
-        const checked = document.querySelectorAll(`input[name=pot${pot}]:checked`);
-        if(checked.length !== 5){
-          errorMsg.textContent = `Error: You must select exactly 5 colors for Pot ${pot}!`;
-          return;
-        }
-        document.getElementById(`pot${pot}_votes`).value = Array.from(checked).map(c=>c.value).join(", ");
-      }
-
-      successMsg.textContent = "Vote submitted successfully! ✅";
+      successMsg.textContent="Vote submitted successfully! ✅";
       voteForm.submit();
     });
   </script>
