@@ -42,12 +42,12 @@
 <body>
   <header>
     <h1>$ORGANICLIFE2026</h1>
-    <p>Vote which colors go into each pot 🌱 (select 5 colors per pot)</p>
+    <p>Vote which colors go into each pot 🌱 (select 5 colors per pot, limited total per color)</p>
   </header>
 
   <section class="section">
     <h2>Choose Colors for Each Pot</h2>
-    <p>Select exactly 5 colors for each pot (5 colors x 5 repetitions = 25 boxes per pot)</p>
+    <p>Select exactly 5 colors per pot. Each color has limited total quantity across all pots.</p>
     
     <form id="vote-form" action="https://formspree.io/f/xbdkrlao" method="POST">
       <div class="vote-section" id="vote-section"></div>
@@ -83,13 +83,14 @@
 
   <script>
     const colors = ["Red","Blue","Green","Yellow","Purple"];
+    const totalPerColor = 5; // total de cada cor disponível
+    const globalStock = { Red: 5, Blue: 5, Green: 5, Yellow: 5, Purple: 5 };
     const voteSection = document.getElementById("vote-section");
 
     for (let pot = 1; pot <= 5; pot++) {
       const potDiv = document.createElement("div");
       potDiv.className = "pot";
-      potDiv.innerHTML = `<h3>Pot ${pot}</h3>
-                          <div class="preview" id="preview-pot${pot}"></div>`;
+      potDiv.innerHTML = `<h3>Pot ${pot}</h3><div class="preview" id="preview-pot${pot}"></div>`;
       const gridDiv = document.createElement("div");
       gridDiv.className = "checkbox-grid";
 
@@ -105,17 +106,15 @@
       potDiv.appendChild(gridDiv);
       voteSection.appendChild(potDiv);
 
-      // Limite de 5 checkboxes por pote e preview
       const checkboxes = potDiv.querySelectorAll(`input[name=pot${pot}]`);
       const previewDiv = document.getElementById(`preview-pot${pot}`);
 
       checkboxes.forEach(cb => {
         cb.addEventListener('change', () => {
           const checked = Array.from(checkboxes).filter(i => i.checked);
-
-          // Bloqueia imediatamente se ultrapassar 5
+          // Limite de 5 por pote
           if(checked.length > 5){
-            cb.checked = false; 
+            cb.checked = false;
             return;
           }
 
@@ -128,8 +127,35 @@
             colorBox.style.height = "30px";
             previewDiv.appendChild(colorBox);
           });
+
+          // Atualiza estoque global
+          updateGlobalStock();
         });
       });
+    }
+
+    function updateGlobalStock() {
+      // reset globalStock
+      const used = { Red:0, Blue:0, Green:0, Yellow:0, Purple:0 };
+      for(let pot=1; pot<=5; pot++){
+        const checked = document.querySelectorAll(`input[name=pot${pot}]:checked`);
+        checked.forEach(c => used[c.value]++);
+      }
+
+      // atualiza checkboxes
+      for(let pot=1; pot<=5; pot++){
+        const checkboxes = document.querySelectorAll(`input[name=pot${pot}]`);
+        checkboxes.forEach(cb => {
+          const remaining = totalPerColor - used[cb.value];
+          if(!cb.checked && remaining <= 0){
+            cb.disabled = true;
+            cb.nextSibling.style.opacity = "0.4";
+          } else {
+            cb.disabled = false;
+            cb.nextSibling.style.opacity = "1";
+          }
+        });
+      }
     }
 
     const voteForm = document.getElementById("vote-form");
@@ -157,7 +183,7 @@
       }
 
       successMsg.textContent = "Vote submitted successfully! ✅";
-      voteForm.submit(); // envia para Formspree
+      voteForm.submit();
     });
   </script>
 </body>
