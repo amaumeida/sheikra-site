@@ -1,154 +1,1170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>$ORGANICLIFE2026 Voting</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
-  <style>
-    * { margin:0; padding:0; box-sizing:border-box; font-family:'Orbitron',sans-serif; }
-    body { background: linear-gradient(180deg, #a8e6cf, #dcedc1); color:#333; min-height:100vh; }
-    header { padding:2rem; text-align:center; background:#379683; color:#fff; box-shadow:0 2px 10px rgba(0,0,0,0.3); }
-    header h1 { font-size:3rem; }
-    header p { font-size:1.2rem; }
-    .section { padding:3rem 2rem; text-align:center; }
-    .section h2 { font-size:2rem; margin-bottom:1rem; color:#ff6f61; }
-    .vote-section { display:flex; flex-direction:column; align-items:center; gap:2rem; margin-top:2rem; }
-    .pot { background:#ffffffaa; padding:1rem; border-radius:10px; width:360px; box-shadow:0 4px 12px rgba(0,0,0,0.2); }
-    .pot h3 { margin-bottom:1rem; text-align:center; color:#222; }
-    .checkbox-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:0.5rem; }
-    label { display:flex; justify-content:center; align-items:center; padding:0.4rem; border-radius:6px; cursor:pointer; font-size:0.9rem; color:#fff; font-weight:bold; }
-    input[type="checkbox"] { display:none; }
-    input[type="checkbox"]:checked + span { border:2px solid #333; transform:scale(1.1); }
-    .color-box { width:40px; height:40px; border-radius:6px; display:flex; justify-content:center; align-items:center; color:#fff; font-weight:bold; transition:transform 0.2s, border 0.2s; }
-    .Red { background-color:#e74c3c; }
-    .Blue { background-color:#3498db; }
-    .Green { background-color:#2ecc71; }
-    .Yellow { background-color:#f1c40f; color:#000; }
-    .Purple { background-color:#9b59b6; }
-    .btn { margin-top:1rem; padding:0.8rem 2rem; background:#ff6f61; color:#fff; font-weight:bold; border-radius:8px; cursor:pointer; transition:0.3s; border:none; }
-    .btn:hover { background:#ff3b2e; transform:scale(1.05); }
-    .footer { background:#379683; padding:2rem; font-size:0.9rem; color:#fff; text-align:center; margin-top:3rem; }
-    .wallet-input { margin-top:2rem; display:flex; flex-direction:column; align-items:center; gap:0.5rem; }
-    .wallet-input input { padding:0.6rem; width:300px; border-radius:6px; border:1px solid #999; font-size:1rem; }
-    .wallet-input p { font-size:0.9rem; color:#555; max-width:350px; text-align:center; }
-    .error-msg { color:#ff0000; font-weight:bold; margin-top:1rem; }
-    .success-msg { color:#00aa00; font-weight:bold; margin-top:1rem; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$ORGANICLIFE2026 - Flower Voting</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header Section */
+        header {
+            background: linear-gradient(135deg, #a8e6cf 0%, #dcedc1 100%);
+            padding: 60px 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.5;
+            animation: drift 20s linear infinite;
+        }
+
+        @keyframes drift {
+            from { transform: translate(0, 0); }
+            to { transform: translate(50px, 50px); }
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #333;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.8);
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #2c5f2d;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .sprout-icon {
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Voting Section */
+        .voting-section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #2c5f2d;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .pots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .pot-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pot-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .pot-card.full {
+            border-color: #4caf50;
+            box-shadow: 0 10px 30px rgba(76,175,80,0.3);
+        }
+
+        .pot-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .pot-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #555;
+        }
+
+        .pot-counter {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .pot-counter.full {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            transform: scale(1.1);
+        }
+
+        .colors-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .color-option {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border-radius: 12px;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .color-option:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+            border-color: #dee2e6;
+        }
+
+        .color-option.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .color-box {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            margin-right: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .color-box::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%);
+            transform: rotate(45deg);
+            transition: all 0.5s;
+        }
+
+        .color-option:hover .color-box::after {
+            transform: translateX(100%) rotate(45deg);
+        }
+
+        .color-red { background: linear-gradient(135deg, #ff6b6b, #ee5a24); }
+        .color-blue { background: linear-gradient(135deg, #4834d4, #686de0); }
+        .color-green { background: linear-gradient(135deg, #00d2d3, #01a3a4); }
+        .color-yellow { background: linear-gradient(135deg, #f9ca24, #f0932b); }
+        .color-purple { background: linear-gradient(135deg, #6c5ce7, #a29bfe); }
+
+        .color-label {
+            flex: 1;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .color-count {
+            font-size: 0.8rem;
+            color: #888;
+            margin-right: 10px;
+            font-weight: 700;
+        }
+
+        .color-option input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: #667eea;
+        }
+
+        /* Preview Box */
+        .preview-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            border-radius: 15px;
+            padding: 15px;
+            min-height: 80px;
+            border: 2px dashed #ccc;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .preview-box.has-flowers {
+            border-color: #4caf50;
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+        }
+
+        .flower-preview {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0) rotate(-180deg); opacity: 0; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        .flower-preview::before {
+            content: '🌸';
+        }
+
+        .flower-preview.red { background: #ff6b6b; }
+        .flower-preview.blue { background: #4834d4; }
+        .flower-preview.green { background: #00d2d3; }
+        .flower-preview.yellow { background: #f9ca24; }
+        .flower-preview.purple { background: #6c5ce7; }
+
+        .preview-text {
+            color: #999;
+            font-size: 0.9rem;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Global Counter */
+        .global-status {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+
+        .global-title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            color: #555;
+        }
+
+        .global-counters {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .global-item {
+            text-align: center;
+            padding: 15px;
+            border-radius: 15px;
+            background: #f8f9fa;
+            min-width: 80px;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .global-item.warning {
+            border-color: #f9ca24;
+            background: #fff9e6;
+            animation: pulse 2s infinite;
+        }
+
+        .global-item.danger {
+            border-color: #ff6b6b;
+            background: #ffe6e6;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .global-color-box {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            margin: 0 auto 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .global-count {
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: #333;
+        }
+
+        .global-label {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        /* Wallet Section */
+        .wallet-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .wallet-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #2c5f2d;
+        }
+
+        .wallet-input-group {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .wallet-input {
+            width: 100%;
+            padding: 18px 25px;
+            font-size: 1rem;
+            border: 3px solid #e0e0e0;
+            border-radius: 50px;
+            font-family: 'Orbitron', sans-serif;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .wallet-input:focus {
+            outline: none;
+            border-color: #a8e6cf;
+            background: white;
+            box-shadow: 0 0 20px rgba(168,230,207,0.3);
+        }
+
+        .wallet-input.error {
+            border-color: #ff6b6b;
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .wallet-note {
+            margin-top: 15px;
+            color: #666;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .wallet-icon {
+            font-size: 1.2rem;
+        }
+
+        /* Submit Button */
+        .submit-section {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 20px 60px;
+            font-size: 1.3rem;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(102,126,234,0.4);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102,126,234,0.5);
+        }
+
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        /* Messages */
+        .message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 20px 30px;
+            border-radius: 15px;
+            color: white;
+            font-weight: 700;
+            z-index: 1000;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            max-width: 350px;
+        }
+
+        .message.show {
+            transform: translateX(0);
+        }
+
+        .message.success {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+
+        .message.error {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+        }
+
+        /* Photo Gallery */
+        .gallery-section {
+            margin-bottom: 60px;
+        }
+
+        .gallery-title {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #2c5f2d;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            aspect-ratio: 1;
+            background: #f0f0f0;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            padding: 20px 10px 10px;
+            color: white;
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        /* Footer */
+        footer {
+            background: #379683;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 1.1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #a8e6cf, #dcedc1, #a8e6cf);
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .footer-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-text {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .sprout-anim {
+            display: inline-block;
+            animation: grow 3s ease-in-out infinite;
+        }
+
+        @keyframes grow {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.2) rotate(10deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .pots-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .global-counters {
+                gap: 10px;
+            }
+            
+            .global-item {
+                min-width: 60px;
+                padding: 10px;
+            }
+            
+            .wallet-section {
+                padding: 25px;
+            }
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .submit-btn.loading .spinner {
+            display: inline-block;
+        }
+
+        .submit-btn.loading .btn-text {
+            opacity: 0.8;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>$ORGANICLIFE2026</h1>
-    <p>Distribute 5 flowers of each color across 5 pots 🌱</p>
-  </header>
 
-  <section class="section">
-    <h2>Vote Which Colors Go Into Each Pot</h2>
-    <form id="vote-form" action="https://formspree.io/f/xbdkrlao" method="POST">
-      <div class="vote-section" id="vote-section"></div>
+    <!-- Header -->
+    <header>
+        <h1>$ORGANICLIFE2026</h1>
+        <div class="subtitle">
+            <span>Distribute 5 flowers of each color across 5 pots</span>
+            <span class="sprout-icon">🌱</span>
+        </div>
+    </header>
 
-      <div class="wallet-input">
-        <input type="text" name="wallet" id="sol-wallet" placeholder="Enter your Solana wallet address" required>
-        <p>No wallet connection required. Only holders of <strong>$OrganicLife2026</strong> are eligible.</p>
-      </div>
+    <div class="container">
+        <!-- Voting Section -->
+        <section class="voting-section">
+            <h2 class="section-title">🌺 Voting Garden 🌺</h2>
+            
+            <!-- Global Color Status -->
+            <div class="global-status">
+                <div class="global-title">Global Color Inventory (Max 5 each)</div>
+                <div class="global-counters">
+                    <div class="global-item" id="global-red">
+                        <div class="global-color-box color-red"></div>
+                        <div class="global-count">0/5</div>
+                        <div class="global-label">Red</div>
+                    </div>
+                    <div class="global-item" id="global-blue">
+                        <div class="global-color-box color-blue"></div>
+                        <div class="global-count">0/5</div>
+                        <div class="global-label">Blue</div>
+                    </div>
+                    <div class="global-item" id="global-green">
+                        <div class="global-color-box color-green"></div>
+                        <div class="global-count">0/5</div>
+                        <div class="global-label">Green</div>
+                    </div>
+                    <div class="global-item" id="global-yellow">
+                        <div class="global-color-box color-yellow"></div>
+                        <div class="global-count">0/5</div>
+                        <div class="global-label">Yellow</div>
+                    </div>
+                    <div class="global-item" id="global-purple">
+                        <div class="global-color-box color-purple"></div>
+                        <div class="global-count">0/5</div>
+                        <div class="global-label">Purple</div>
+                    </div>
+                </div>
+            </div>
 
-      <input type="hidden" name="pot1_votes" id="pot1_votes">
-      <input type="hidden" name="pot2_votes" id="pot2_votes">
-      <input type="hidden" name="pot3_votes" id="pot3_votes">
-      <input type="hidden" name="pot4_votes" id="pot4_votes">
-      <input type="hidden" name="pot5_votes" id="pot5_votes">
+            <!-- Pots Grid -->
+            <div class="pots-grid" id="potsContainer">
+                <!-- Pots will be generated by JavaScript -->
+            </div>
+        </section>
 
-      <button type="submit" class="btn">Submit Vote</button>
-      <div class="error-msg" id="error-msg"></div>
-      <div class="success-msg" id="success-msg"></div>
+        <!-- Wallet Section -->
+        <section class="wallet-section">
+            <h2 class="wallet-title">💼 Connect Wallet</h2>
+            <div class="wallet-input-group">
+                <input 
+                    type="text" 
+                    class="wallet-input" 
+                    id="walletInput" 
+                    placeholder="Enter your Solana wallet address..."
+                    maxlength="44"
+                >
+                <div class="wallet-note">
+                    <span class="wallet-icon">🔒</span>
+                    <span>No wallet connection required. Only holders of $OrganicLife2026 are eligible to participate.</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Submit Section -->
+        <div class="submit-section">
+            <button class="submit-btn" id="submitBtn" onclick="submitVote()">
+                <span class="btn-text">Submit Vote 🌸</span>
+                <div class="spinner"></div>
+            </button>
+        </div>
+
+        <!-- Photo Gallery -->
+        <section class="gallery-section">
+            <h2 class="gallery-title">🌷 Petunia Gallery 🌷</h2>
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Gallery items will be generated by JavaScript -->
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-text">
+                <span>© 2026 $ORGANICLIFE2026.</span>
+                <span>A continuous living meme <span class="sprout-anim">🌱</span></span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Message Container -->
+    <div id="messageContainer"></div>
+
+    <!-- Hidden Form for Formspree -->
+    <form id="hiddenForm" action="https://formspree.io/f/xbdkrlao" method="POST" style="display: none;">
+        <input type="text" name="wallet" id="formWallet">
+        <input type="text" name="pot1" id="formPot1">
+        <input type="text" name="pot2" id="formPot2">
+        <input type="text" name="pot3" id="formPot3">
+        <input type="text" name="pot4" id="formPot4">
+        <input type="text" name="pot5" id="formPot5">
+        <input type="text" name="timestamp" id="formTimestamp">
     </form>
-  </section>
 
-  <section class="footer">
-    <p>&copy; 2026 $ORGANICLIFE2026. A continuous living meme 🌱</p>
-  </section>
+    <script>
+        // Configuration
+        const COLORS = [
+            { id: 'red', name: 'Red', class: 'color-red' },
+            { id: 'blue', name: 'Blue', class: 'color-blue' },
+            { id: 'green', name: 'Green', class: 'color-green' },
+            { id: 'yellow', name: 'Yellow', class: 'color-yellow' },
+            { id: 'purple', name: 'Purple', class: 'color-purple' }
+        ];
+        
+        const NUM_POTS = 5;
+        const MAX_PER_POT = 5;
+        const MAX_PER_COLOR = 5;
 
-  <script>
-    const colors = ["Red","Blue","Green","Yellow","Purple"];
-    const totalPerColor = 5; // total global
-    const numPots = 5;
-    const voteSection = document.getElementById("vote-section");
-
-    // Contador global inicial
-    const globalCount = { Red:0, Blue:0, Green:0, Yellow:0, Purple:0 };
-
-    for(let pot=1; pot<=numPots; pot++){
-      const potDiv = document.createElement("div");
-      potDiv.className = "pot";
-      potDiv.innerHTML = `<h3>Pot ${pot}</h3><div class="preview" id="preview-pot${pot}"></div>`;
-      const grid = document.createElement("div");
-      grid.className="checkbox-grid";
-
-      colors.forEach(color=>{
-        for(let i=0;i<5;i++){
-          const id=`pot${pot}_${color}${i}`;
-          const label = document.createElement("label");
-          label.innerHTML = `<input type="checkbox" name="pot${pot}" value="${color}" id="${id}"><span class="color-box ${color}">${color[0]}</span>`;
-          grid.appendChild(label);
+        // State management
+        let potSelections = {};
+        let globalColorCount = {};
+        
+        // Initialize state
+        function initializeState() {
+            for (let i = 1; i <= NUM_POTS; i++) {
+                potSelections[i] = [];
+            }
+            COLORS.forEach(color => {
+                globalColorCount[color.id] = 0;
+            });
         }
-      });
 
-      potDiv.appendChild(grid);
-      voteSection.appendChild(potDiv);
+        // Generate pots HTML
+        function generatePots() {
+            const container = document.getElementById('potsContainer');
+            
+            for (let i = 1; i <= NUM_POTS; i++) {
+                const potDiv = document.createElement('div');
+                potDiv.className = 'pot-card';
+                potDiv.id = `pot-${i}`;
+                
+                let colorsHtml = '';
+                COLORS.forEach(color => {
+                    colorsHtml += `
+                        <label class="color-option" id="pot${i}-${color.id}-label">
+                            <div class="color-box ${color.class}"></div>
+                            <span class="color-label">${color.name}</span>
+                            <span class="color-count" id="pot${i}-${color.id}-count"></span>
+                            <input type="checkbox" 
+                                   id="pot${i}-${color.id}" 
+                                   onchange="handleColorToggle(${i}, '${color.id}')"
+                                   data-pot="${i}" 
+                                   data-color="${color.id}">
+                        </label>
+                    `;
+                });
+                
+                potDiv.innerHTML = `
+                    <div class="pot-header">
+                        <div class="pot-title">🪴 Pot ${i}</div>
+                        <div class="pot-counter" id="pot${i}-counter">0/5</div>
+                    </div>
+                    <div class="colors-grid">
+                        ${colorsHtml}
+                    </div>
+                    <div class="preview-box" id="pot${i}-preview">
+                        <span class="preview-text">Select flowers to see preview...</span>
+                    </div>
+                    <input type="hidden" name="pot${i}_data" id="pot${i}-hidden" value="">
+                `;
+                
+                container.appendChild(potDiv);
+            }
+        }
 
-      const checkboxes = potDiv.querySelectorAll(`input[name=pot${pot}]`);
-      const preview = document.getElementById(`preview-pot${pot}`);
+        // Generate gallery
+        function generateGallery() {
+            const container = document.getElementById('galleryGrid');
+            const petuniaColors = ['pink', 'purple', 'red', 'white', 'blue', 'yellow', 'mixed'];
+            
+            for (let i = 1; i <= 12; i++) {
+                const color = petuniaColors[i % petuniaColors.length];
+                const div = document.createElement('div');
+                div.className = 'gallery-item';
+                div.innerHTML = `
+                    <img src="https://images.unsplash.com/photo-${getPetuniaImageId(i)}?w=300&h=300&fit=crop" 
+                         alt="Petunia ${color}" 
+                         loading="lazy"
+                         onerror="this.src='https://placehold.co/150x150/dcEDC1/333?text=Petunia+${i}'">
+                    <div class="gallery-overlay">Petunia ${color.charAt(0).toUpperCase() + color.slice(1)} 🌸</div>
+                `;
+                container.appendChild(div);
+            }
+        }
 
-      checkboxes.forEach(cb=>{
-        cb.addEventListener('change',()=>{
-          const checkedPot = Array.from(checkboxes).filter(i=>i.checked);
-          if(checkedPot.length>5){ cb.checked=false; return; }
+        function getPetuniaImageId(index) {
+            // Using specific Unsplash image IDs for petunia-like flowers
+            const ids = [
+                '1558293842-c3558a1cb5dd',
+                '1490750967868-58cb75069ed6',
+                '1518709766631-a6bf5e3e6f7f',
+                '1455659817276-f0a462a3d56f',
+                '1463936575229-48b785116f0f',
+                '1496062033456-0243628775a6',
+                '1518882605630-8995b47b1b74',
+                '1525310072747-f58fc21056e7',
+                '1463320898484-cdee814a96e6',
+                '1501004318641-b39e6451bec6',
+                '1459411552884-841db9b3cc2a',
+                '1465146344425-f00d5f5c8f07'
+            ];
+            return ids[index - 1] || ids[0];
+        }
 
-          // Contagem global
-          const currentGlobal = { Red:0, Blue:0, Green:0, Yellow:0, Purple:0 };
-          const allChecked = document.querySelectorAll("input[type=checkbox]:checked");
-          allChecked.forEach(c=>currentGlobal[c.value]++);
+        // Handle color selection
+        function handleColorToggle(potId, colorId) {
+            const checkbox = document.getElementById(`pot${potId}-${colorId}`);
+            const isChecked = checkbox.checked;
+            
+            if (isChecked) {
+                // Check pot limit
+                if (potSelections[potId].length >= MAX_PER_POT) {
+                    showMessage(`Pot ${potId} already has ${MAX_PER_POT} flowers!`, 'error');
+                    checkbox.checked = false;
+                    return;
+                }
+                
+                // Check global limit
+                if (globalColorCount[colorId] >= MAX_PER_COLOR) {
+                    showMessage(`Global limit reached for ${COLORS.find(c => c.id === colorId).name} (max ${MAX_PER_COLOR})`, 'error');
+                    checkbox.checked = false;
+                    return;
+                }
+                
+                // Add to selections
+                potSelections[potId].push(colorId);
+                globalColorCount[colorId]++;
+                
+                // Add animation effect
+                animateFlowerGrowth(potId, colorId);
+            } else {
+                // Remove from selections
+                const index = potSelections[potId].indexOf(colorId);
+                if (index > -1) {
+                    potSelections[potId].splice(index, 1);
+                    globalColorCount[colorId]--;
+                }
+            }
+            
+            updateUI();
+        }
 
-          if(currentGlobal[cb.value]>totalPerColor){
-            cb.checked=false;
-            alert(`You can only use ${cb.value} up to ${totalPerColor} times globally!`);
-            return;
-          }
+        // Animate flower growing
+        function animateFlowerGrowth(potId, colorId) {
+            const preview = document.getElementById(`pot${potId}-preview`);
+            const flower = document.createElement('div');
+            flower.className = `flower-preview ${colorId}`;
+            flower.style.animation = 'popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            preview.appendChild(flower);
+            
+            setTimeout(() => {
+                updatePreview(potId);
+            }, 500);
+        }
 
-          // Atualiza preview do pote
-          preview.innerHTML="";
-          checkedPot.forEach(chk=>{
-            const box=document.createElement("div");
-            box.className=`color-box ${chk.value}`;
-            box.style.width="30px";
-            box.style.height="30px";
-            preview.appendChild(box);
-          });
+        // Update all UI elements
+        function updateUI() {
+            // Update each pot
+            for (let i = 1; i <= NUM_POTS; i++) {
+                updatePotUI(i);
+            }
+            
+            // Update global counters
+            updateGlobalUI();
+        }
+
+        function updatePotUI(potId) {
+            const count = potSelections[potId].length;
+            const counterEl = document.getElementById(`pot${potId}-counter`);
+            const potCard = document.getElementById(`pot-${potId}`);
+            
+            counterEl.textContent = `${count}/${MAX_PER_POT}`;
+            
+            if (count === MAX_PER_POT) {
+                counterEl.classList.add('full');
+                potCard.classList.add('full');
+            } else {
+                counterEl.classList.remove('full');
+                potCard.classList.remove('full');
+            }
+            
+            // Update preview
+            updatePreview(potId);
+            
+            // Update hidden input
+            document.getElementById(`pot${potId}-hidden`).value = potSelections[potId].join(',');
+            
+            // Update checkboxes availability
+            COLORS.forEach(color => {
+                const checkbox = document.getElementById(`pot${potId}-${color.id}`);
+                const label = document.getElementById(`pot${potId}-${color.id}-label`);
+                
+                if (!checkbox.checked) {
+                    if (count >= MAX_PER_POT || globalColorCount[color.id] >= MAX_PER_COLOR) {
+                        label.classList.add('disabled');
+                        checkbox.disabled = true;
+                    } else {
+                        label.classList.remove('disabled');
+                        checkbox.disabled = false;
+                    }
+                }
+            });
+        }
+
+        function updatePreview(potId) {
+            const preview = document.getElementById(`pot${potId}-preview`);
+            const colors = potSelections[potId];
+            
+            if (colors.length === 0) {
+                preview.innerHTML = '<span class="preview-text">Select flowers to see preview...</span>';
+                preview.classList.remove('has-flowers');
+            } else {
+                preview.classList.add('has-flowers');
+                preview.innerHTML = '';
+                colors.forEach(colorId => {
+                    const flower = document.createElement('div');
+                    flower.className = `flower-preview ${colorId}`;
+                    preview.appendChild(flower);
+                });
+            }
+        }
+
+        function updateGlobalUI() {
+            COLORS.forEach(color => {
+                const count = globalColorCount[color.id];
+                const el = document.getElementById(`global-${color.id}`);
+                const countEl = el.querySelector('.global-count');
+                
+                countEl.textContent = `${count}/${MAX_PER_COLOR}`;
+                
+                el.classList.remove('warning', 'danger');
+                if (count === MAX_PER_COLOR) {
+                    el.classList.add('danger');
+                } else if (count >= 3) {
+                    el.classList.add('warning');
+                }
+            });
+        }
+
+        // Show message
+        function showMessage(text, type) {
+            const container = document.getElementById('messageContainer');
+            const msg = document.createElement('div');
+            msg.className = `message ${type}`;
+            msg.textContent = text;
+            container.appendChild(msg);
+            
+            setTimeout(() => msg.classList.add('show'), 100);
+            
+            setTimeout(() => {
+                msg.classList.remove('show');
+                setTimeout(() => msg.remove(), 300);
+            }, 3000);
+        }
+
+        // Submit vote
+        function submitVote() {
+            const btn = document.getElementById('submitBtn');
+            const walletInput = document.getElementById('walletInput');
+            
+            // Validate wallet
+            const wallet = walletInput.value.trim();
+            if (!wallet) {
+                walletInput.classList.add('error');
+                showMessage('Please enter your Solana wallet address!', 'error');
+                setTimeout(() => walletInput.classList.remove('error'), 500);
+                return;
+            }
+            
+            // Validate each pot has exactly 5 flowers
+            let valid = true;
+            for (let i = 1; i <= NUM_POTS; i++) {
+                if (potSelections[i].length !== MAX_PER_POT) {
+                    showMessage(`Pot ${i} must have exactly ${MAX_PER_POT} flowers!`, 'error');
+                    valid = false;
+                    break;
+                }
+            }
+            
+            if (!valid) return;
+            
+            // Check all global limits respected
+            COLORS.forEach(color => {
+                if (globalColorCount[color.id] > MAX_PER_COLOR) {
+                    showMessage(`Global limit exceeded for ${color.name}!`, 'error');
+                    valid = false;
+                }
+            });
+            
+            if (!valid) return;
+            
+            // Set loading state
+            btn.classList.add('loading');
+            btn.disabled = true;
+            
+            // Populate hidden form
+            document.getElementById('formWallet').value = wallet;
+            for (let i = 1; i <= NUM_POTS; i++) {
+                document.getElementById(`formPot${i}`).value = potSelections[i].join(',');
+            }
+            document.getElementById('formTimestamp').value = new Date().toISOString();
+            
+            // Submit to Formspree
+            const form = document.getElementById('hiddenForm');
+            const formData = new FormData(form);
+            
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    showMessage('🌸 Vote submitted successfully! Thank you for participating! 🌸', 'success');
+                    // Reset form
+                    setTimeout(() => {
+                        resetForm();
+                    }, 2000);
+                } else {
+                    throw new Error('Submission failed');
+                }
+            })
+            .catch(error => {
+                showMessage('Error submitting vote. Please try again.', 'error');
+            })
+            .finally(() => {
+                btn.classList.remove('loading');
+                btn.disabled = false;
+            });
+        }
+
+        function resetForm() {
+            // Reset all checkboxes
+            document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+                cb.checked = false;
+                cb.disabled = false;
+            });
+            
+            // Reset state
+            initializeState();
+            
+            // Reset UI
+            document.querySelectorAll('.color-option').forEach(el => el.classList.remove('disabled'));
+            updateUI();
+            
+            // Clear wallet
+            document.getElementById('walletInput').value = '';
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeState();
+            generatePots();
+            generateGallery();
+            
+            // Remove error class on input
+            document.getElementById('walletInput').addEventListener('input', function() {
+                this.classList.remove('error');
+            });
         });
-      });
-    }
-
-    const voteForm = document.getElementById("vote-form");
-    const errorMsg = document.getElementById("error-msg");
-    const successMsg = document.getElementById("success-msg");
-
-    voteForm.addEventListener("submit", e=>{
-      e.preventDefault();
-      errorMsg.textContent="";
-      successMsg.textContent="";
-
-      const wallet = document.getElementById("sol-wallet").value.trim();
-      if(!wallet){ errorMsg.textContent="Error: Please enter your Solana wallet address!"; return; }
-
-      for(let pot=1;pot<=numPots;pot++){
-        const checked=document.querySelectorAll(`input[name=pot${pot}]:checked`);
-        if(checked.length>5){ errorMsg.textContent=`Error: You can select max 5 colors per pot!`; return; }
-        document.getElementById(`pot${pot}_votes`).value=Array.from(checked).map(c=>c.value).join(", ");
-      }
-
-      successMsg.textContent="Vote submitted successfully! ✅";
-      voteForm.submit();
-    });
-  </script>
+    </script>
 </body>
 </html>
