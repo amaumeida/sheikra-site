@@ -1,22 +1,16 @@
 <?php
-// Recebe os dados enviados do frontend
 $data = json_decode(file_get_contents("php://input"), true);
 
-$to = "amauri.sublime@gmail.com"; // Seu e-mail
-$subject = "Nova submissão do Petunia Puzzle Garden";
+$to = "amauri.sublime@gmail.com";
+$subject = "New Petunia Puzzle Vote";
 
-$message = "";
-foreach($data as $key => $value){
-    $message .= "$key: $value\n";
+$message = "WALLET:\n".$data['wallet']."\n\nPOTS:\n";
+foreach($data['pots'] as $i => $pot){
+    $message .= "Pot ".($i+1).": ".implode(", ",$pot)."\n";
 }
 
-$headers = "From: no-reply@petuniapuzzle.com\r\n" .
-           "Reply-To: no-reply@petuniapuzzle.com\r\n" .
-           "X-Mailer: PHP/" . phpversion();
+$headers = "From: Petunia Puzzle <no-reply@yourdomain.com>";
 
-if(mail($to, $subject, $message, $headers)){
-    echo json_encode(["status" => "success"]);
-} else {
-    echo json_encode(["status" => "error"]);
-}
-?>
+mail($to,$subject,$message,$headers);
+echo json_encode(["status"=>"ok"]);
+
