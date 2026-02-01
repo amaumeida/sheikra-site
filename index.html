@@ -5,51 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Petunia Puzzle Garden</title>
 <style>
-/* ==================== Estilos principais ==================== */
 * {margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Segoe UI',sans-serif;background:linear-gradient(135deg,#f5f7fa 0%,#c3cfe2 100%);color:#2d3748;min-height:100vh;}
-.container{max-width:1400px;margin:0 auto;padding:20px;}
-.logo-header{text-align:center;margin-bottom:30px;padding:20px;background:rgba(255,255,255,0.8);border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,0.1);}
-.logo-header img{max-width:300px;height:auto;border-radius:10px;}
-.intro-section{background:white;border-radius:20px;padding:30px;margin-bottom:30px;box-shadow:0 10px 30px rgba(0,0,0,0.1);text-align:center;position:relative;overflow:hidden;}
-.intro-section::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#e63946,#ff69b4,#f1faee,#7209b7,#c77dad);}
-.intro-section h1{font-size:2.2em;margin-bottom:15px;color:#1a202c;font-weight:700;}
-.intro-section p{max-width:800px;margin:0 auto;line-height:1.8;color:#4a5568;font-size:1.1em;}
-.intro-section strong{color:#2d3748;}
-.main-layout{display:grid;grid-template-columns:2fr 1fr;gap:30px;align-items:start;}
-.game-area{background:white;border-radius:20px;padding:30px;box-shadow:0 10px 30px rgba(0,0,0,0.1);}
-.game-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;flex-wrap:wrap;gap:15px;}
-h2{color:#2d3748;font-size:1.6em;}
-.stats{display:flex;gap:15px;font-weight:600;color:#4a5568;font-size:0.9em;}
-.stat-item{background:#edf2f7;padding:8px 16px;border-radius:8px;}
-.color-controls{background:#f7fafc;border-radius:15px;padding:20px;margin-bottom:25px;border:2px solid #e2e8f0;}
-.color-controls h3{text-align:center;margin-bottom:15px;color:#4a5568;font-size:1.1em;}
-.inventory{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;}
-.color-btn{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px;border:none;border-radius:12px;cursor:pointer;transition:all 0.3s;background:white;box-shadow:0 2px 6px rgba(0,0,0,0.1);min-width:70px;}
-.color-btn:hover:not(:disabled){transform:translateY(-3px);box-shadow:0 4px 12px rgba(0,0,0,0.15);}
-.color-btn:disabled{opacity:0.4;cursor:not-allowed;filter:grayscale(0.8);}
-.color-preview{width:35px;height:35px;border-radius:50%;font-size:18px;display:flex;align-items:center;justify-content:center;}
-.count{font-weight:700;font-size:1em;color:#2d3748;}
-.color-label{font-size:0.75em;color:#718096;}
-.garden{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-bottom:25px;}
-.pot-container{text-align:center;}
-.pot-label{font-weight:700;margin-bottom:8px;color:#2d3748;font-size:1.1em;}
-.pot{background:linear-gradient(145deg,#8b4513,#a0522d);border-radius:0 0 35px 35px;padding:15px;position:relative;box-shadow:0 5px 15px rgba(0,0,0,0.2);min-height:90px;display:flex;flex-direction:row;justify-content:center;align-items:center;gap:6px;transition:transform 0.2s;}
-.pot:hover{transform:translateY(-3px);}
-.pot::before{content:'';position:absolute;top:-10px;left:-5px;right:-5px;height:20px;background:#654321;border-radius:50%;z-index:1;}
-.flower-slot{width:45px;height:45px;border-radius:50%;background:rgba(255,255,255,0.2);border:2px dashed rgba(255,255,255,0.4);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s;font-size:20px;position:relative;z-index:2;flex-shrink:0;}
-.flower-slot.filled{border:none;background:transparent;cursor:default;}
-.flower-slot:hover:not(.filled){background:rgba(255,255,255,0.3);transform:scale(1.1);}
-.flower{width:100%;height:100%;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 2px 8px rgba(0,0,0,0.2);animation:bloom 0.5s ease-out;}
-@keyframes bloom{0%{transform:scale(0) rotate(-180deg);}100%{transform:scale(1) rotate(0deg);}}
-.red{background:radial-gradient(circle at 30% 30%,#ff6b6b,#c92a2a);color:white;}
-.pink{background:radial-gradient(circle at 30% 30%,#ffb8d9,#d6336c);color:white;}
-.white{background:radial-gradient(circle at 30% 30%,#ffffff,#dee2e6);color:#495057;border:1px solid #dee2e6;}
-.purple{background:radial-gradient(circle at 30% 30%,#da77f2,#862e9c);color:white;}
-.lilac{background:radial-gradient(circle at 30% 30%,#e9ecef,#9775fa);color:#495057;}
-.action-buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:20px;}
-.btn{padding:10px 24px;border:none;border-radius:20px;font-size:0.9em;font-weight:600;cursor:pointer;transition:all 0.3s;text-transform:uppercase;letter-spacing:0.5px;}
-.btn-primary{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;}
+body {font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;background:linear-gradient(135deg,#f5f7fa 0%,#c3cfe2 100%);min-height:100vh;color:#2d3748;}
+.container {max-width:1400px;margin:0 auto;padding:20px;}
+.logo-header {text-align:center;margin-bottom:30px;padding:20px;background:rgba(255,255,255,0.8);border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,0.1);}
+.logo-header img {max-width:300px;height:auto;border-radius:10px;}
+.intro-section {background:white;border-radius:20px;padding:30px;margin-bottom:30px;box-shadow:0 10px 30px rgba(0,0,0,0.1);text-align:center;position:relative;overflow:hidden;}
+.intro-section::before {content:'';position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#e63946,#ff69b4,#f1faee,#7209b7,#c77dad);}
+.intro-section h1 {font-size:2.2em;margin-bottom:15px;color:#1a202c;font-weight:700;}
+.intro-section p {max-width:800px;margin:0 auto;line-height:1.8;color:#4a5568;font-size:1.1em;}
+.main-layout {display:grid;grid-template-columns:2fr 1fr;gap:30px;align-items:start;}
+.game-area {background:white;border-radius:20px;padding:30px;box-shadow:0 10px 30px rgba(0,0,0,0.1);}
+.game-header {display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;flex-wrap:wrap;gap:15px;}
+h2 {color:#2d3748;font-size:1.6em;}
+.stats {display:flex;gap:15px;font-weight:600;color:#4a5568;font-size:0.9em;}
+.stat-item {background:#edf2f7;padding:8px 16px;border-radius:8px;}
+.color-controls {background:#f7fafc;border-radius:15px;padding:20px;margin-bottom:25px;border:2px solid #e2e8f0;}
+.color-controls h3 {text-align:center;margin-bottom:15px;color:#4a5568;font-size:1.1em;}
+.inventory {display:flex;justify-content:center;gap:12px;flex-wrap:wrap;}
+.color-btn {display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px;border:none;border-radius:12px;cursor:pointer;transition:all 0.3s;background:white;box-shadow:0 2px 6px rgba(0,0,0,0.1);min-width:70px;}
+.color-btn:hover:not(:disabled) {transform:translateY(-3px);box-shadow:0 4px 12px rgba(0,0,0,0.15);}
+.color-btn:disabled {opacity:0.4;cursor:not-allowed;filter:grayscale(0.8);}
+.color-preview {width:35px;height:35px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;}
+.count {font-weight:700;font-size:1em;color:#2d3748;}
+.color-label {font-size:0.75em;color:#718096;}
+.garden {display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-bottom:25px;}
+.pot-container {text-align:center;}
+.pot-label {font-weight:700;margin-bottom:8px;color:#2d3748;font-size:1.1em;}
+.pot {background:linear-gradient(145deg,#8b4513,#a0522d);border-radius:0 0 35px 35px;padding:15px;position:relative;box-shadow:0 5px 15px rgba(0,0,0,0.2);min-height:90px;display:flex;flex-direction:row;justify-content:center;align-items:center;gap:6px;transition:transform 0.2s;}
+.pot:hover {transform:translateY(-3px);}
+.pot::before {content:'';position:absolute;top:-10px;left:-5px;right:-5px;height:20px;background:#654321;border-radius:50%;z-index:1;}
+.flower-slot {width:45px;height:45px;border-radius:50%;background:rgba(255,255,255,0.2);border:2px dashed rgba(255,255,255,0.4);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s;font-size:20px;position:relative;z-index:2;flex-shrink:0;}
+.flower-slot.filled {border:none;background:transparent;cursor:default;}
+.flower-slot:hover:not(.filled) {background:rgba(255,255,255,0.3);transform:scale(1.1);}
+.flower {width:100%;height:100%;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 2px 8px rgba(0,0,0,0.2);animation:bloom 0.5s ease-out;}
+@keyframes bloom {0%{transform:scale(0) rotate(-180deg);}100%{transform:scale(1) rotate(0deg);}}
+.red {background:radial-gradient(circle at 30% 30%,#ff6b6b,#c92a2a);color:white;}
+.pink {background:radial-gradient(circle at 30% 30%,#ffb8d9,#d6336c);color:white;}
+.white {background:radial-gradient(circle at 30% 30%,#ffffff,#dee2e6);color:#495057;border:1px solid #dee2e6;}
+.purple {background:radial-gradient(circle at 30% 30%,#da77f2,#862e9c);color:white;}
+.lilac {background:radial-gradient(circle at 30% 30%,#e9ecef,#9775fa);color:#495057;}
+.action-buttons {display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:20px;}
+.btn {padding:10px 24px;border:none;border-radius:20px;font-size:0.9em;font-weight:600;cursor:pointer;transition:all 0.3s;text-transform:uppercase;letter-spacing:0.5px;}
+.btn-primary {background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;}
 .btn-primary:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 5px 15px rgba(102,126,234,0.4);}
 .btn-primary:disabled{opacity:0.5;cursor:not-allowed;}
 .btn-secondary{background:#e2e8f0;color:#4a5568;}
@@ -65,67 +63,111 @@ h2{color:#2d3748;font-size:1.6em;}
 .petunia-showcase img{width:100%;height:auto;display:block;transition:transform 0.3s;}
 .petunia-showcase img:hover{transform:scale(1.05);}
 .image-caption{margin-top:15px;padding:15px;background:#f7fafc;border-radius:10px;font-size:0.95em;color:#4a5568;line-height:1.6;text-align:center;}
-input[type=text]{padding:8px 12px;border-radius:10px;border:1px solid #ccc;width:100%;margin-top:8px;margin-bottom:15px;font-size:1em;}
-/* ===== Responsive ===== */
-@media(max-width:968px){.main-layout{grid-template-columns:1fr;}.image-area{position:static;order:-1;}.petunia-showcase{max-width:500px;margin:0 auto;}}
-@media(max-width:600px){.logo-header img{max-width:200px;}.garden{grid-template-columns:1fr;}.pot{gap:4px;padding:12px 8px;}.flower-slot{width:38px;height:38px;font-size:18px;}.flower{font-size:20px;}}
+input[type="text"] {padding:10px;border-radius:10px;border:1px solid #cbd5e0;width:100%;margin-top:10px;margin-bottom:15px;font-size:1em;}
 </style>
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-<script>
-(function(){emailjs.init("YOUR_PUBLIC_KEY");})(); // Substitua YOUR_PUBLIC_KEY pelo seu Public Key do EmailJS
-</script>
 </head>
 <body>
 <div class="container">
-    <div class="logo-header"><img src="https://images.unsplash.com/photo-1562690868-60bbe7293e94?w=400&auto=format&fit=crop&q=80" alt="OrganicLife Logo"></div>
-    <div class="intro-section">
-        <h1>The Petunia Puzzle Garden</h1>
-        <p><strong>Welcome!</strong> Petunias are beautiful flowers. There are 5 colors: Red, Pink, White, Purple, and Lilac. Each color has 5 flowers. You will plant them into 5 pots. Track your inventory carefully—if you plant 3 Red in Pot 1, only 2 Red remain for other pots.</p>
-    </div>
-    <div class="main-layout">
-        <div class="game-area">
-            <div class="game-header">
-                <h2>Your Garden</h2>
-                <div class="stats">
-                    <div class="stat-item">Attempts: <span id="attempt-count">0</span></div>
-                    <div class="stat-item">Status: <span id="game-status">Planting...</span></div>
-                </div>
-            </div>
-            <div class="color-controls">
-                <h3>Select a pot, then click a color to plant:</h3>
-                <div class="inventory" id="inventory"></div>
-            </div>
-            <div class="garden" id="garden"></div>
-            <input type="text" id="wallet" placeholder="Enter your Solana wallet (eligible only if holding $OrganicLife2026)">
-            <div class="action-buttons">
-                <button class="btn btn-secondary" onclick="clearCurrentPot()">Clear Selected Pot</button>
-                <button class="btn btn-secondary" onclick="resetGarden()">Reset All</button>
-                <button class="btn btn-primary" onclick="submitVote()" id="submit-btn" disabled>Submit Vote</button>
-            </div>
-            <div class="feedback" id="feedback"><strong>Feedback:</strong> <span id="feedback-text"></span><div class="attempts-list" id="attempts-list"></div></div>
-        </div>
-        <div class="image-area">
-            <h3>Beautiful Petunias</h3>
-            <div class="petunia-showcase"><img src="https://images.unsplash.com/photo-1562690868-60bbe7293e94?w=800&auto=format&fit=crop&q=80" alt="Petunias"></div>
-            <div class="image-caption">Petunias come in a wide variety of colors and patterns.</div>
-        </div>
-    </div>
+
+<div class="logo-header">
+<img src="/mnt/kimi/upload/2a9d84c0-f05d-42ce-bd56-d5574137e78e.png" alt="OrganicLife Logo">
+</div>
+
+<div class="intro-section">
+<h1>The Petunia Puzzle Garden</h1>
+<p><strong>Welcome!</strong> Petunias are beautiful, trumpet-shaped flowering plants. In this game, 25 flowers are secretly planted in 5 pots (5 flowers per color: Red, Pink, White, Purple, Lilac). Your mission: recreate the exact arrangement!<br><br>
+<strong>How to Play:</strong> Click a pot, then click color buttons to plant. You can only use 5 flowers per color total, spread across all pots. Remove flowers by clicking them. Fill all pots to submit your guess!</p>
+</div>
+
+<div class="main-layout">
+<div class="game-area">
+<div class="game-header">
+<h2>Your Garden</h2>
+<div class="stats">
+<div class="stat-item">Attempts: <span id="attempt-count">0</span></div>
+<div class="stat-item">Status: <span id="game-status">Planting...</span></div>
+</div>
+</div>
+
+<div class="color-controls">
+<h3>Select a pot then a color to plant:</h3>
+<div class="inventory" id="inventory">
+<button class="color-btn" data-color="red" onclick="selectColor('red')">
+<div class="color-preview red">🌺</div>
+<div class="count" id="count-red">5</div>
+<div class="color-label">Red</div>
+</button>
+<button class="color-btn" data-color="pink" onclick="selectColor('pink')">
+<div class="color-preview pink">🌸</div>
+<div class="count" id="count-pink">5</div>
+<div class="color-label">Pink</div>
+</button>
+<button class="color-btn" data-color="white" onclick="selectColor('white')">
+<div class="color-preview white">🌼</div>
+<div class="count" id="count-white">5</div>
+<div class="color-label">White</div>
+</button>
+<button class="color-btn" data-color="purple" onclick="selectColor('purple')">
+<div class="color-preview purple">🪻</div>
+<div class="count" id="count-purple">5</div>
+<div class="color-label">Purple</div>
+</button>
+<button class="color-btn" data-color="lilac" onclick="selectColor('lilac')">
+<div class="color-preview lilac">🌷</div>
+<div class="count" id="count-lilac">5</div>
+<div class="color-label">Lilac</div>
+</button>
+</div>
+</div>
+
+<div class="garden" id="garden"></div>
+
+<div>
+<label for="wallet">Enter your Solana wallet number (eligible if holding $OrganicLife2026):</label>
+<input type="text" id="wallet" placeholder="Solana Wallet Number">
+</div>
+
+<div class="action-buttons">
+<button class="btn btn-secondary" onclick="clearCurrentPot()">Clear Selected Pot</button>
+<button class="btn btn-secondary" onclick="resetGarden()">Reset All</button>
+<button class="btn btn-primary" onclick="submitVote()" id="submit-btn">Submit Vote</button>
+</div>
+
+<div class="feedback" id="feedback"><strong>Feedback:</strong> <span id="feedback-text"></span></div>
+</div>
+
+<div class="image-area">
+<h3>Beautiful Petunias</h3>
+<div class="petunia-showcase">
+<img src="https://images.unsplash.com/photo-1562690868-60bbe7293e94?w=800&auto=format&fit=crop&q=80" alt="Colorful Petunia Flowers">
+</div>
+<div class="image-caption">
+Petunias bloom in a variety of colors. Your task is to use strategy and observation to recreate the secret garden!
+</div>
+</div>
+</div>
 </div>
 
 <script>
-// ==================== Jogo ====================
 const COLORS=['red','pink','white','purple','lilac'];
 const EMOJIS={red:'🌺',pink:'🌸',white:'🌼',purple:'🪻',lilac:'🌷'};
-const MAX_PER_COLOR=5; const POTS_COUNT=5; const FLOWERS_PER_POT=5;
-let solution=[]; let currentPots=[[],[],[],[],[]]; let inventory={red:5,pink:5,white:5,purple:5,lilac:5};
-let selectedPot=0; let attempts=0;
+const MAX_PER_COLOR=5;
+const POTS_COUNT=5;
+const FLOWERS_PER_POT=5;
+
+let solution=[];
+let currentPots=[[],[],[],[],[]];
+let inventory={red:5,pink:5,white:5,purple:5,lilac:5};
+let selectedPot=0;
+let attempts=0;
 
 function initGame(){
-    generateSolution(); renderColorButtons(); renderPots(); updateInventoryDisplay();
+    generateSolution();
+    renderPots();
+    updateInventoryDisplay();
     document.getElementById('attempt-count').textContent='0';
     document.getElementById('game-status').textContent='Planting...';
     document.getElementById('feedback').classList.remove('show');
-    document.getElementById('attempts-list').innerHTML='';
     attempts=0;
 }
 
@@ -134,46 +176,105 @@ function generateSolution(){
     let available=[];
     COLORS.forEach(color=>{for(let i=0;i<MAX_PER_COLOR;i++){available.push(color);}});
     available.sort(()=>Math.random()-0.5);
-    for(let pot=0;pot<POTS_COUNT;pot++){for(let f=0;f<FLOWERS_PER_POT;f++){solution[pot].push(available.pop());}}
-}
-
-function renderColorButtons(){
-    const inventoryDiv=document.getElementById('inventory'); inventoryDiv.innerHTML='';
-    COLORS.forEach(color=>{
-        const btn=document.createElement('button'); btn.className='color-btn'; btn.dataset.color=color;
-        btn.onclick=()=>selectColor(color);
-        btn.innerHTML=`<div class="color-preview ${color}">${EMOJIS[color]}</div><div class="count" id="count-${color}">5</div><div class="color-label">${color.charAt(0).toUpperCase()+color.slice(1)}</div>`;
-        inventoryDiv.appendChild(btn);
-    });
+    for(let pot=0;pot<POTS_COUNT;pot++){
+        for(let flower=0;flower<FLOWERS_PER_POT;flower++){
+            solution[pot].push(available.pop());
+        }
+    }
 }
 
 function renderPots(){
-    const garden=document.getElementById('garden'); garden.innerHTML='';
+    const garden=document.getElementById('garden');
+    garden.innerHTML='';
     for(let i=0;i<POTS_COUNT;i++){
-        const potDiv=document.createElement('div'); potDiv.className='pot-container';
-        const label=document.createElement('div'); label.className='pot-label'; label.textContent=`Pot ${i+1}`; if(i===selectedPot){label.style.color='#667eea';label.textContent+=' ✓';}
-        const pot=document.createElement('div'); pot.className='pot'; pot.onclick=()=>selectPot(i);
+        const potDiv=document.createElement('div');potDiv.className='pot-container';
+        const label=document.createElement('div');label.className='pot-label';label.textContent=`Pot ${i+1}`;
+        if(i===selectedPot){label.style.color='#667eea';label.textContent+=' ✓';}
+        const pot=document.createElement('div');pot.className='pot';pot.onclick=()=>selectPot(i);
         if(i===selectedPot){pot.style.boxShadow='0 0 0 4px #667eea, 0 5px 15px rgba(0,0,0,0.2)';}
         for(let j=0;j<FLOWERS_PER_POT;j++){
-            const slot=document.createElement('div'); slot.className='flower-slot';
-            if(currentPots[i][j]){slot.className+=' filled'; const flower=document.createElement('div'); flower.className=`flower ${currentPots[i][j]}`; flower.textContent=EMOJIS[currentPots[i][j]]; flower.onclick=(e)=>{e.stopPropagation(); removeFlower(i,j);}; slot.appendChild(flower);}
-            else{slot.textContent='+'; slot.onclick=(e)=>{e.stopPropagation(); selectPot(i);}}
+            const slot=document.createElement('div');slot.className='flower-slot';
+            if(currentPots[i][j]){
+                slot.className+=' filled';
+                const flower=document.createElement('div');flower.className=`flower ${currentPots[i][j]}`;flower.textContent=EMOJIS[currentPots[i][j]];
+                flower.onclick=(e)=>{e.stopPropagation();removeFlower(i,j);}
+                slot.appendChild(flower);
+            } else {slot.textContent='+';slot.onclick=(e)=>{e.stopPropagation();selectPot(i);}}
             pot.appendChild(slot);
         }
-        potDiv.appendChild(label); potDiv.appendChild(pot); garden.appendChild(potDiv);
+        potDiv.appendChild(label);potDiv.appendChild(pot);garden.appendChild(potDiv);
     }
     updateCheckButton();
 }
 
-function selectPot(i){selectedPot=i;renderPots();}
+function selectPot(index){selectedPot=index;renderPots();}
+
 function selectColor(color){
-    if(inventory[color]<=0)return;
-    if(currentPots[selectedPot].length>=FLOWERS_PER_POT)return;
-    currentPots[selectedPot].push(color); inventory[color]--; renderPots(); updateInventoryDisplay();
+    if(inventory[color]<=0){alert(`You have used all ${color} flowers!`);return;}
+    if(currentPots[selectedPot].length>=FLOWERS_PER_POT){alert(`Pot ${selectedPot+1} is full!`);return;}
+    currentPots[selectedPot].push(color);inventory[color]--;
+    renderPots();updateInventoryDisplay();
+    if(currentPots[selectedPot].length>=FLOWERS_PER_POT){
+        let nextPot=currentPots.findIndex(p=>p.length<FLOWERS_PER_POT);
+        if(nextPot!==-1){selectedPot=nextPot;renderPots();}
+    }
 }
 
-function removeFlower(potIndex,flowerIndex){const color=currentPots[potIndex][flowerIndex];currentPots[potIndex].splice(flowerIndex,1);inventory[color]++;renderPots();updateInventoryDisplay();}
-function clearCurrentPot(){currentPots[selectedPot].forEach(c=>inventory[c]++);currentPots[selectedPot]=[];renderPots();updateInventoryDisplay();}
-function resetGarden(){currentPots=[[],[],[],[],[]];inventory={red:5,pink:5,white:5,purple:5,lilac:5};selectedPot=0;renderPots();updateInventoryDisplay();document.getElementById('feedback').classList.remove('show');}
-function updateInventoryDisplay(){COLORS.forEach(color=>{const btn=document.querySelector(`[data-color="${color}"]`); const count=document.getElementById(`count-${color}`);count.textContent=inventory[color]; btn.disabled=inventory[color]<=0;});}
-function updateCheckButton(){const allFull=currentPots.every(p=>p.length===FLOWERS_PER_POT);
+function removeFlower(potIndex,flowerIndex){
+    const color=currentPots[potIndex][flowerIndex];
+    currentPots[potIndex].splice(flowerIndex,1);
+    inventory[color]++;
+    renderPots();updateInventoryDisplay();
+}
+
+function clearCurrentPot(){
+    currentPots[selectedPot].forEach(color=>{inventory[color]++;});
+    currentPots[selectedPot]=[];
+    renderPots();updateInventoryDisplay();
+}
+
+function resetGarden(){
+    currentPots=[[],[],[],[],[]];
+    inventory={red:5,pink:5,white:5,purple:5,lilac:5};
+    selectedPot=0;
+    renderPots();updateInventoryDisplay();
+    document.getElementById('feedback').classList.remove('show');
+}
+
+function updateInventoryDisplay(){
+    COLORS.forEach(color=>{
+        const btn=document.querySelector(`[data-color="${color}"]`);
+        const count=document.getElementById(`count-${color}`);
+        count.textContent=inventory[color];
+        btn.disabled=(inventory[color]<=0);
+    });
+}
+
+function updateCheckButton(){
+    const allFull=currentPots.every(p=>p.length===FLOWERS_PER_POT);
+    document.getElementById('submit-btn').disabled=!allFull;
+}
+
+function submitVote(){
+    const wallet=document.getElementById('wallet').value.trim();
+    if(!wallet){alert('Please enter your Solana wallet number!');return;}
+    let payload='';
+    currentPots.forEach((p,pi)=>{payload+=`Pot ${pi+1}: ${p.join(', ')}\n`;});
+    payload+=`Wallet: ${wallet}`;
+
+    fetch('https://formspree.io/f/xbdkrlao',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({message:payload})
+    }).then(res=>{
+        document.getElementById('feedback-text').textContent='Your submission has been sent! Thank you!';
+        document.getElementById('feedback').classList.add('show');
+        attempts++;document.getElementById('attempt-count').textContent=attempts;
+        resetGarden();
+    }).catch(err=>{alert('Error sending submission. Please try again.');});
+}
+
+initGame();
+</script>
+</body>
+</html>
