@@ -258,20 +258,31 @@ function updateCheckButton(){
 function submitVote(){
     const wallet=document.getElementById('wallet').value.trim();
     if(!wallet){alert('Please enter your Solana wallet number!');return;}
-    let payload='';
-    currentPots.forEach((p,pi)=>{payload+=`Pot ${pi+1}: ${p.join(', ')}\n`;});
-    payload+=`Wallet: ${wallet}`;
+    
+    let payload = {};
+    currentPots.forEach((p, pi) => {
+        payload[`Pot ${pi+1}`] = p.join(', ');
+    });
+    payload["Wallet"] = wallet;
 
-    fetch('https://formspree.io/f/xbdkrlao',{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({message:payload})
-    }).then(res=>{
-        document.getElementById('feedback-text').textContent='Your submission has been sent! Thank you!';
-        document.getElementById('feedback').classList.add('show');
-        attempts++;document.getElementById('attempt-count').textContent=attempts;
-        resetGarden();
-    }).catch(err=>{alert('Error sending submission. Please try again.');});
+    fetch('send-email.php', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(payload)
+    })
+    .then(res => res.json())
+    .then(data => {
+        if(data.status === "success"){
+            document.getElementById('feedback-text').textContent='Your submission has been sent! Thank you!';
+            document.getElementById('feedback').classList.add('show');
+            attempts++;
+            document.getElementById('attempt-count').textContent=attempts;
+            resetGarden();
+        } else {
+            alert('Error sending submission. Please try again.');
+        }
+    })
+    .catch(err => {alert('Error sending submission. Please try again.');});
 }
 
 initGame();
